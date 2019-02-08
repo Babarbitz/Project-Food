@@ -1,4 +1,4 @@
-% INCLUDE A DEVISION OF LABOUR WHICH INDICATES THE CONTRIBUTIONS OF EACH MEMBER 
+% INCLUDE A DEVISION OF LABOUR WHICH INDICATES THE CONTRIBUTIONS OF EACH MEMBER
 
 \documentclass[12pt, titlepage]{article}
 
@@ -7,6 +7,7 @@
 \usepackage{tabularx}
 \usepackage{enumerate}
 \usepackage[shortlabels]{enumitem}
+\usepackage{graphicx}
 
 % Just a placeholder for now
 
@@ -53,16 +54,28 @@
 \section{Overall Description}
 
   \subsection{Product Perspective}
+  This product is a 2-dimensional video game similar to many games on the market such as Binding of Isaac, Soul Knight, Pokémon, and more. Our video game fits in the adventure category for players. The product is independent and totally self-contained, it does not require any other extra programs or internet.
+  
+   \begin{figure}[htp]
+	\centering
+	\includegraphics[width=13cm]{hta}
+	\caption{Block Diagram}
+	\label{fig:block}
+   \end{figure}
+
+  
   \subsection{Product Functions}
   \subsection{User Characteristics}
+  The education level required would be the completion of middle school. The user must have experience with playing platformer/dungeon crawling games and should know the overall objective of the game. Technical expertise is required for the use of the players movement and action controls and volume adjustment.
   \subsection{Constraints}
+  Time will limit the development of the game as we only have a couple of months before its completion. University course load, midterms, and labs will also be a limiting factor.
   \subsection{Assumptions and Dependencies}
   \subsection{Apportioning of Requirements}
 
 \section{Functional Requirements}
 
 \begin{enumerate}[{VP}1.]
-  \item User 
+  \item User
   \begin{enumerate}[{BE1}.1]
     \item The user wants to start game
     \begin{enumerate}
@@ -138,8 +151,8 @@
 \label{ssub:appearance_requirements}
 % Begin SubSubSection
 \begin{enumerate}[{LF}1. ]
-	\item The game interface shall be easy and clear for users to operate.
-	\item The game must not contain any frightening scenes.
+        \item The game interface shall be easy and clear for users to operate.
+        \item The game must not contain any frightening scenes.
 \end{enumerate}
 % End SubSubSection
 
@@ -147,7 +160,7 @@
 \label{ssub:style_requirements}
 % Begin SubSubSection
 \begin{enumerate}[{LF}3. ]
-	\item The user should feel that the gameplay increases in difficulty as their game progress increases
+        \item The user should feel that the gameplay increases in difficulty as their game progress increases
 \end{enumerate}
 % End SubSubSection
 
@@ -161,7 +174,7 @@
 \label{ssub:ease_of_use_requirements}
 % Begin SubSubSection
 \begin{enumerate}[start=1,label={ UH\arabic*.}]
-	\item Gameplay shall be easy for a person of 10 years of age or older to learn.
+        \item Gameplay shall be easy for a person of 10 years of age or older to learn.
 \end{enumerate}
 % End SubSubSection
 
@@ -175,8 +188,8 @@ N/A
 \label{ssub:learning_requirements}
 % Begin SubSubSection
 \begin{enumerate}[start=2,label={ UH\arabic*.}]
-	\item It shall take a maximum time of 5 minutes to learn the basic operation
-	\item After a full read through of the provided instruction manual, the user should be able to use all in-game functionality with ease
+        \item It shall take a maximum time of 5 minutes to learn the basic operation
+        \item After a full read through of the provided instruction manual, the user should be able to use all in-game functionality with ease
 \end{enumerate}
 % End SubSubSection
 
@@ -184,11 +197,11 @@ N/A
 \label{ssub:understandability_and_politeness_requirements}
 % Begin SubSubSection
 \begin{enumerate}[start=4,label={ UH\arabic*.}]
-	\item All in game icons shall be taken from their common usage icons where applicable.
-	\item The appearance of all food enemies will be intuitive to their physical appearance
-	\item New terminology used in game shall come with a brief explanation of their meaning
-	\item Ambiguous language, such as words with conflicting alternate meanings, used in in-game decisions shall have their meaning clarified
-	
+        \item All in game icons shall be taken from their common usage icons where applicable.
+        \item The appearance of all food enemies will be intuitive to their physical appearance
+        \item New terminology used in game shall come with a brief explanation of their meaning
+        \item Ambiguous language, such as words with conflicting alternate meanings, used in in-game decisions shall have their meaning clarified
+
 \end{enumerate}
 % End SubSubSection
 
@@ -196,13 +209,13 @@ N/A
 \label{ssub:accessibility_requirements}
 % Begin SubSubSection
 \begin{enumerate}[start=8,label={ UH\arabic*.}]
-	\item The game navigation shall be based on the standard PC control scheme of using WASD mapping, and the mouse.
-	\item All in game elements will have high contrast with surrounding elements to aid colour blind users
-	\item All fonts used for in-game text shall be deemed accessible
-	\item All information communicated via sound shall have an accompanying box of text transcribing the information
-	\item The user should be able to mute or reduce the volume of in-game sound effects and music
-	\item The user should be provided with an epilepsy warning in advance of scenes with flashing lights or rapidly changing colours
-	
+        \item The game navigation shall be based on the standard PC control scheme of using WASD mapping, and the mouse.
+        \item All in game elements will have high contrast with surrounding elements to aid colour blind users
+        \item All fonts used for in-game text shall be deemed accessible
+        \item All information communicated via sound shall have an accompanying box of text transcribing the information
+        \item The user should be able to mute or reduce the volume of in-game sound effects and music
+        \item The user should be provided with an epilepsy warning in advance of scenes with flashing lights or rapidly changing colours
+
 \end{enumerate}
 % End SubSubSection
 
@@ -216,8 +229,8 @@ N/A
 \label{ssub:speed_and_latency_requirements}
 % Begin SubSubSection
 \begin{enumerate}[{PR}1. ]
-	\item The response time shall be within 1 ms.
-	\item Setting up a new game shall take no more than 5 seconds.
+        \item The response time shall be within 1 ms.
+        \item Setting up a new game shall take no more than 5 seconds.
 \end{enumerate}
 % End SubSubSection
 
@@ -237,7 +250,7 @@ N/A
 \label{ssub:reliability_and_availability_requirements}
 % Begin SubSubSection
 \begin{enumerate}[start=3,label={ PR\arabic*.}]
-	\item The game shall be able to run 24 hours per day, 365 days per year.
+        \item The game shall be able to run 24 hours per day, 365 days per year.
 \end{enumerate}
 % End SubSubSection
 
@@ -245,7 +258,7 @@ N/A
 \label{ssub:robustness_or_fault_tolerance_requirements}
 % Begin SubSubSection
 \begin{enumerate}[start=4,label={ PR\arabic*.}]
-	\item The game shall not be affected, such as information loss, due to any internet issue.
+        \item The game shall not be affected, such as information loss, due to any internet issue.
 \end{enumerate}
 % End SubSubSection
 
@@ -253,8 +266,8 @@ N/A
 \label{ssub:capacity_requirements}
 % Begin SubSubSection
 \begin{enumerate}[start=5,label={ PR\arabic*.}]
-	\item The game shall store achievement data for up to one player
-	
+        \item The game shall store achievement data for up to one player
+
 \end{enumerate}
 % End SubSubSection
 
@@ -298,8 +311,8 @@ N/A
 \label{ssub:release_requirements}
 % Begin SubSubSection
 \begin{enumerate}[{OE}1. ]
-	\item Maintenance releases that fix an error within the game shall be available as soon as they are produced
-	\item Feature releases will be comprised of numerous features and will be released with a maximum monthly frequency
+        \item Maintenance releases that fix an error within the game shall be available as soon as they are produced
+        \item Feature releases will be comprised of numerous features and will be released with a maximum monthly frequency
 \end{enumerate}
 % End SubSubSection
 
@@ -313,10 +326,10 @@ N/A
 \label{ssub:maintenance_requirements}
 % Begin SubSubSection
 \begin{enumerate}[{MS}1. ]
-	\item Levels should be modifiable after the product's release
-	\item Floors should be modifiable after the product's release
-	\item The ability to add new levels (and floors) after the product's release should be available
-	\item The variety of food should be modifiable after the product's release.
+        \item Levels should be modifiable after the product's release
+        \item Floors should be modifiable after the product's release
+        \item The ability to add new levels (and floors) after the product's release should be available
+        \item The variety of food should be modifiable after the product's release.
 \end{enumerate}
 % End SubSubSection
 
@@ -324,9 +337,9 @@ N/A
 \label{ssub:supportability_requirements}
 % Begin SubSubSection
 \begin{enumerate}[start=5,label={ MS\arabic*.}]
-	\item The game shall provide the user with a comprehensive set of instructions
-	\item The game shall provide the user with a set of Frequently Asked Questions
-	\item The game shall provide the user with a detailed explanation of the functionality of each item that may appear.
+        \item The game shall provide the user with a comprehensive set of instructions
+        \item The game shall provide the user with a set of Frequently Asked Questions
+        \item The game shall provide the user with a detailed explanation of the functionality of each item that may appear.
 \end{enumerate}
 % End SubSubSection
 
@@ -334,7 +347,7 @@ N/A
 \label{ssub:adaptability_requirements}
 % Begin SubSubSection
 \begin{enumerate}[start=8,label={ MS\arabic*.} ]
-	\item The game is expected to run under Windows and Linux operating system
+        \item The game is expected to run under Windows and Linux operating system
 \end{enumerate}
 % End SubSubSection
 
@@ -384,7 +397,7 @@ N/A
 \label{ssub:cultural_requirements}
 % Begin SubSubSection
 \begin{enumerate}[{CP}1. ]
-	\item The game shall not include any features that could be considered offensive in any of our market countries.
+        \item The game shall not include any features that could be considered offensive in any of our market countries.
 \end{enumerate}
 % End SubSubSection
 
@@ -392,7 +405,7 @@ N/A
 \label{ssub:political_requirements}
 % Begin SubSubSection
 \begin{enumerate}[]
-	\item N/A
+        \item N/A
 \end{enumerate}
 % End SubSubSection
 
@@ -406,7 +419,7 @@ N/A
 \label{ssub:compliance_requirements}
 % Begin SubSubSection
 \begin{enumerate}[{LR}1. ]
-	\item All game asset shall be compliant with the Web Content Accessibility Guidelines
+        \item All game asset shall be compliant with the Web Content Accessibility Guidelines
 \end{enumerate}
 % End SubSubSection
 
