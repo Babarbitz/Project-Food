@@ -5,6 +5,7 @@
 \usepackage{booktabs}
 \usepackage{comment}
 \usepackage{tabularx}
+\usepackage{enumerate}
 
 % Just a placeholder for now
 
@@ -32,6 +33,19 @@
   \subsection{Purpose}
   \subsection{Scope}
   \subsection{Definitions, Acronyms, and Abbreviations}
+
+  \begin{itemize}
+    \item[] \textit{Player} - The central playing piece of the game and the avatar that the user controls to interact with the game
+    \item[] \textit{Map} - A network of interconnected rooms that form the available playing space for the player
+    \item[] \textit{Levels} - A series of stages of incrementing difficulty that the player traverses
+    \item[] \textit{Spawn Room} - The starting room that the player spawns in when entering a map for the first time
+    \item[] \textit{Inventory} - The space that allows a player to store items, funds, and equipment
+    \item[] \textit{Skills} - Abilities that a player can acquire from playing the game that improve the combat effectiviness of the player
+    \item[] \textit{Entities} - Objects that the player can interact with
+    \item[] \textit{Crafting} - The act of combining two or more items to create a new item
+    \item[] \textit{Ingredients} - The material items that are consumed during crafting
+  \end{itemize}
+
   \subsection{References}
   \subsection{Overview}
 
@@ -45,6 +59,72 @@
   \subsection{Apportioning of Requirements}
 
 \section{Functional Requirements}
+
+\begin{enumerate}[{VP}1.]
+  \item User 
+  \begin{enumerate}[{BE1}.1]
+    \item The user wants to start game
+    \begin{enumerate}
+      \item The system presents a menu with the option of starting a new game or loading a previous save file
+      \item The user must be able to select either option of starting a new game or loading a previous save
+      \item If load game is selected, a list of all save files is presented
+      \item Each save file must be selectable
+    \end{enumerate}
+    \item The user starts a new game
+    \begin{enumerate}
+      \item A \textit{Level 1 Map} must be generated
+      \item The \textit{Player} must be placed in the \textit{Spawn Room}
+      \item The player's \textit{Inventory} must be created
+    \end{enumerate}
+    \item The user loads a game
+    \begin{enumerate}
+      \item The map must be loaded from the save file
+      \item The Player must be placed in the Spawn Room
+      \item The Player's Inventory must be loaded from the save file
+      \item All previously attained \textit{Skills} must be loaded from the save file
+    \end{enumerate}
+    \item The user wants to traverse the map
+    \begin{enumerate}
+      \item The Player must move in the direction given by the user's input
+      \item Each room must have at least one passage to another room or level
+      \item The Player must be able to enter through each passage
+      \item Each room must have associated \textit{Entities}
+      \item The state of each room must be saved when exited
+      \item A newly entered room must generate all of its Entities
+    \end{enumerate}
+    \item The user wants to buy an item
+    \begin{enumerate}
+      \item Each Map generated must have at least one \textit{Shop}
+      \item Each Shop must have a list of items with an associated cost
+      \item The Player must be able to interact with the shop
+      \item The Player must be able to purchase items from the Shop if they have sufficient funds in their Inventory
+    \end{enumerate}
+    \item The user wants to craft an item
+    \begin{enumerate}
+      \item The Player must be able to open a menu listing all of their owned items
+      \item The Player must be able to combining two or more items in their Inventory to create new items
+      \item If an item is \textit{Crafted}, it is added to the inventory and its \textit{Ingredients} are removed from the Inventory
+    \end{enumerate}
+    \item The user initiates combat with an enemy
+    \begin{enumerate}
+      \item Requirement
+      \item Requirement
+      \item \dots
+    \end{enumerate}
+    \item The user initiates combat with a boss
+    \begin{enumerate}
+      \item Requirement
+      \item Requirement
+      \item \dots
+    \end{enumerate}
+    \item The user enters a level transition
+    \begin{enumerate}
+      \item Requirement
+      \item Requirement
+      \item \dots
+    \end{enumerate}
+  \end{enumerate}
+\end{enumerate}
 
 \section{Non-Functional Requirements}
 
