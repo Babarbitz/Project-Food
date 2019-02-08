@@ -6,6 +6,7 @@
 \usepackage{comment}
 \usepackage{tabularx}
 \usepackage{enumerate}
+\usepackage[shortlabels]{enumitem}
 
 % Just a placeholder for now
 
@@ -127,59 +128,295 @@
 \end{enumerate}
 
 \section{Non-Functional Requirements}
+\label{sec:non-functional_requirements}
+% Begin Section
+\subsection{Look and Feel Requirements}
+\label{sub:look_and_feel_requirements}
+% Begin SubSection
 
-  \subsection {Look and Feel Requirements}
+\subsubsection{Appearance Requirements}
+\label{ssub:appearance_requirements}
+% Begin SubSubSection
+\begin{enumerate}[{LF}1. ]
+	\item The game interface shall be easy and clear for users to operate.
+	\item The game must not contain any frightening scenes.
+\end{enumerate}
+% End SubSubSection
 
-    \subsubsection{Appearance Requirements}
-    \subsubsection{Style Requirements}
+\subsubsection{Style Requirements}
+\label{ssub:style_requirements}
+% Begin SubSubSection
+\begin{enumerate}[{LF}3. ]
+	\item The user should feel that the gameplay increases in difficulty as their game progress increases
+\end{enumerate}
+% End SubSubSection
 
-  \subsection{Usability and Humanity Requirements}
+% End SubSection
 
-    \subsubsection{Ease of Use Requirements}
-    \subsubsection{Personalization and Internationalization Requirements}
-    \subsubsection{Learning Requirements}
-    \subsubsection{Understandability and Politeness Requirements}
-    \subsubsection{Accessibility Requirements}
+\subsection{Usability and Humanity Requirements}
+\label{sub:usability_and_humanity_requirements}
+% Begin SubSection
 
-  \subsection{Performance Requirements}
+\subsubsection{Ease of Use Requirements}
+\label{ssub:ease_of_use_requirements}
+% Begin SubSubSection
+\begin{enumerate}[start=1,label={ UH\arabic*.}]
+	\item Gameplay shall be easy for a person of 10 years of age or older to learn.
+\end{enumerate}
+% End SubSubSection
 
-    \subsubsection{Speed and Latency Requirements}
-    \subsubsection{Safety-Critical Requirements}
-    \subsubsection{Precision or Accuracy Requirements}
-    \subsubsection{Reliability and Avalibility Requirements}
-    \subsubsection{Robustness or Fault-Tolerance Requirements}
-    \subsubsection{Capacity Requirements}
-    \subsubsection{Scalability or Extensibility Requirements}
-    \subsubsection{Longevity Requirements}
-  
-  \subsection{Operational and Environment Requirements}
+\subsubsection{Personalization and Internationalization Requirements}
+\label{ssub:personalization_and_internationalization_requirements}
+% Begin SubSubSection
+N/A
+% End SubSubSection
 
-	\subsubsection{Expected Physical Environment}
-    \subsubsection{Requirements for Interfacing with Adjacent Systems}
-    \subsubsection{Productization Requirements}
-    \subsubsection{Release Requirements}
+\subsubsection{Learning Requirements}
+\label{ssub:learning_requirements}
+% Begin SubSubSection
+\begin{enumerate}[start=2,label={ UH\arabic*.}]
+	\item It shall take a maximum time of 5 minutes to learn the basic operation
+	\item After a full read through of the provided instruction manual, the user should be able to use all in-game functionality with ease
+\end{enumerate}
+% End SubSubSection
 
-  \subsection{Maintainability and Support Requirements}
+\subsubsection{Understandability and Politeness Requirements}
+\label{ssub:understandability_and_politeness_requirements}
+% Begin SubSubSection
+\begin{enumerate}[start=4,label={ UH\arabic*.}]
+	\item All in game icons shall be taken from their common usage icons where applicable.
+	\item The appearance of all food enemies will be intuitive to their physical appearance
+	\item New terminology used in game shall come with a brief explanation of their meaning
+	\item Ambiguous language, such as words with conflicting alternate meanings, used in in-game decisions shall have their meaning clarified
+	
+\end{enumerate}
+% End SubSubSection
 
-    \subsubsection{Maintainance Requirements}
-    \subsubsection{Supportability Requirements}
-    \subsubsection{Adaptability Requirements}
+\subsubsection{Accessibility Requirements}
+\label{ssub:accessibility_requirements}
+% Begin SubSubSection
+\begin{enumerate}[start=8,label={ UH\arabic*.}]
+	\item The game navigation shall be based on the standard PC control scheme of using WASD mapping, and the mouse.
+	\item All in game elements will have high contrast with surrounding elements to aid colour blind users
+	\item All fonts used for in-game text shall be deemed accessible
+	\item All information communicated via sound shall have an accompanying box of text transcribing the information
+	\item The user should be able to mute or reduce the volume of in-game sound effects and music
+	\item The user should be provided with an epilepsy warning in advance of scenes with flashing lights or rapidly changing colours
+	
+\end{enumerate}
+% End SubSubSection
 
-  \subsection{Security Requirements}
+% End SubSection
 
-    \subsubsection{Access Requirements}
-    \subsubsection{Integrity Requirements}
-    \subsubsection{Privacy Requirements}
-    \subsubsection{Audit Requirements}
-    \subsubsection{Immunity Requirements}
+\subsection{Performance Requirements}
+\label{sub:performance_requirements}
+% Begin SubSection
 
-  \subsection{Cultural and Political Requirements}
+\subsubsection{Speed and Latency Requirements}
+\label{ssub:speed_and_latency_requirements}
+% Begin SubSubSection
+\begin{enumerate}[{PR}1. ]
+	\item The response time shall be within 1 ms.
+	\item Setting up a new game shall take no more than 5 seconds.
+\end{enumerate}
+% End SubSubSection
 
-    \subsubsection{Cultural Requirements}
-    \subsubsection{Political Requirements}
+\subsubsection{Safety-Critical Requirements}
+\label{ssub:safety_critical_requirements}
+% Begin SubSubSection
+N/A
+% End SubSubSection
 
-  \subsection{Legal Requirements}
+\subsubsection{Precision or Accuracy Requirements}
+\label{ssub:precision_or_accuracy_requirements}
+% Begin SubSubSection
+N/A
+% End SubSubSection
 
-    \subsubsection{Compliance Requirements}
-    \subsubsection{Standards Requirements}
+\subsubsection{Reliability and Availability Requirements}
+\label{ssub:reliability_and_availability_requirements}
+% Begin SubSubSection
+\begin{enumerate}[start=3,label={ PR\arabic*.}]
+	\item The game shall be able to run 24 hours per day, 365 days per year.
+\end{enumerate}
+% End SubSubSection
+
+\subsubsection{Robustness or Fault-Tolerance Requirements}
+\label{ssub:robustness_or_fault_tolerance_requirements}
+% Begin SubSubSection
+\begin{enumerate}[start=4,label={ PR\arabic*.}]
+	\item The game shall not be affected, such as information loss, due to any internet issue.
+\end{enumerate}
+% End SubSubSection
+
+\subsubsection{Capacity Requirements}
+\label{ssub:capacity_requirements}
+% Begin SubSubSection
+\begin{enumerate}[start=5,label={ PR\arabic*.}]
+	\item The game shall store achievement data for up to one player
+	
+\end{enumerate}
+% End SubSubSection
+
+\subsubsection{Scalability or Extensibility Requirements}
+\label{ssub:scalability_or_extensibility_requirements}
+% Begin SubSubSection
+N/A
+% End SubSubSection
+
+\subsubsection{Longevity Requirements}
+\label{ssub:longevity_requirements}
+% Begin SubSubSection
+N/A
+% End SubSubSection
+
+% End SubSection
+
+\subsection{Operational and Environmental Requirements}
+\label{sub:operational_and_environmental_requirements}
+% Begin SubSection
+
+\subsubsection{Expected Physical Environment}
+\label{ssub:expected_physical_environment}
+% Begin SubSubSection
+N/A
+% End SubSubSection
+
+\subsubsection{Requirements for Interfacing with Adjacent Systems}
+\label{ssub:requirements_for_interfacing_with_adjacent_systems}
+% Begin SubSubSection
+N/A
+% End SubSubSection
+
+\subsubsection{Productization Requirements}
+\label{ssub:productization_requirements}
+% Begin SubSubSection
+N/A
+% End SubSubSection
+
+\subsubsection{Release Requirements}
+\label{ssub:release_requirements}
+% Begin SubSubSection
+\begin{enumerate}[{OE}1. ]
+	\item Maintenance releases that fix an error within the game shall be available as soon as they are produced
+	\item Feature releases will be comprised of numerous features and will be released with a maximum monthly frequency
+\end{enumerate}
+% End SubSubSection
+
+% End SubSection
+
+\subsection{Maintainability and Support Requirements}
+\label{sub:maintainability_and_support_requirements}
+% Begin SubSection
+
+\subsubsection{Maintenance Requirements}
+\label{ssub:maintenance_requirements}
+% Begin SubSubSection
+\begin{enumerate}[{MS}1. ]
+	\item Levels should be modifiable after the product's release
+	\item Floors should be modifiable after the product's release
+	\item The ability to add new levels (and floors) after the product's release should be available
+	\item The variety of food should be modifiable after the product's release.
+\end{enumerate}
+% End SubSubSection
+
+\subsubsection{Supportability Requirements}
+\label{ssub:supportability_requirements}
+% Begin SubSubSection
+\begin{enumerate}[start=5,label={ MS\arabic*.}]
+	\item The game shall provide the user with a comprehensive set of instructions
+	\item The game shall provide the user with a set of Frequently Asked Questions
+	\item The game shall provide the user with a detailed explanation of the functionality of each item that may appear.
+\end{enumerate}
+% End SubSubSection
+
+\subsubsection{Adaptability Requirements}
+\label{ssub:adaptability_requirements}
+% Begin SubSubSection
+\begin{enumerate}[start=8,label={ MS\arabic*.} ]
+	\item The game is expected to run under Windows and Linux operating system
+\end{enumerate}
+% End SubSubSection
+
+% End SubSection
+
+\subsection{Security Requirements}
+\label{sub:security_requirements}
+% Begin SubSection
+
+\subsubsection{Access Requirements}
+\label{ssub:access_requirements}
+% Begin SubSubSection
+N/A
+% End SubSubSection
+
+\subsubsection{Integrity Requirements}
+\label{ssub:integrity_requirements}
+% Begin SubSubSection
+N/A
+% End SubSubSection
+
+\subsubsection{Privacy Requirements}
+\label{ssub:privacy_requirements}
+% Begin SubSubSection
+N/A
+% End SubSubSection
+
+\subsubsection{Audit Requirements}
+\label{ssub:audit_requirements}
+% Begin SubSubSection
+N/A
+% End SubSubSection
+
+\subsubsection{Immunity Requirements}
+\label{ssub:immunity_requirements}
+% Begin SubSubSection
+N/A
+% End SubSubSection
+
+% End SubSection
+
+\subsection{Cultural and Political Requirements}
+\label{sub:cultural_and_political_requirements}
+% Begin SubSection
+
+\subsubsection{Cultural Requirements}
+\label{ssub:cultural_requirements}
+% Begin SubSubSection
+\begin{enumerate}[{CP}1. ]
+	\item The game shall not include any features that could be considered offensive in any of our market countries.
+\end{enumerate}
+% End SubSubSection
+
+\subsubsection{Political Requirements}
+\label{ssub:political_requirements}
+% Begin SubSubSection
+\begin{enumerate}[]
+	\item N/A
+\end{enumerate}
+% End SubSubSection
+
+% End SubSection
+
+\subsection{Legal Requirements}
+\label{sub:legal_requirements}
+% Begin SubSection
+
+\subsubsection{Compliance Requirements}
+\label{ssub:compliance_requirements}
+% Begin SubSubSection
+\begin{enumerate}[{LR}1. ]
+	\item All game asset shall be compliant with the Web Content Accessibility Guidelines
+\end{enumerate}
+% End SubSubSection
+
+\subsubsection{Standards Requirements}
+\label{ssub:standards_requirements}
+% Begin SubSubSection
+N/A
+% End SubSubSection
+
+% End SubSection
+
+% End Section
 \end{document}
