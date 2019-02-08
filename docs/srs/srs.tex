@@ -2,13 +2,18 @@
 
 \documentclass[12pt, titlepage]{article}
 
-\usepackage{booktabs}
-\usepackage{comment}
-\usepackage{tabularx}
+\usepackage{amssymb}
+\usepackage{amstext}
+\usepackage{amsthm}
+\usepackage{amsmath}
 \usepackage{enumerate}
-\usepackage[shortlabels]{enumitem}
+\usepackage{fancyhdr}
+\usepackage[margin=1in]{geometry}
 \usepackage{graphicx}
-
+\usepackage{extarrows}
+\usepackage[shortlabels]{enumitem}
+\usepackage{setspace}
+\usepackage{tabu}
 % Just a placeholder for now
 
 \title{Group 11 SRS Document}
@@ -31,25 +36,74 @@
 \pagenumbering{arabic}
 
 \section{Introduction}
+% Begin Section
+This document provides the specifications for the software titled \textbf{Project Food} (this name is temporary and may change once a decision has been made among the development team). Henceforth, this project shall be referred to as Project Food for the entirety of this document.
 
-  \subsection{Purpose}
+This document is split into four major sections. The first (and current) section provides an introduction to the software. Section two elaborates on the overall description of the software. The third and fourth sections contain the functional and non-functional requirements of the product, respectively.
+
+  \subsection{Purpose} 
+  % Begin SubSection
+  The purpose of this document is to present a functional description of Project Food. The document shall elaborate on the overall description, functional requirements, and non-functional requirements of the software. This document is intended for developers, stakeholders, and users of Project Food.
+  % End SubSection
   \subsection{Scope}
-  \subsection{Definitions, Acronyms, and Abbreviations}
+  % Begin SubSection
 
-  \begin{itemize}
-    \item[] \textit{Player} - The central playing piece of the game and the avatar that the user controls to interact with the game
-    \item[] \textit{Map} - A network of interconnected rooms that form the available playing space for the player
-    \item[] \textit{Levels} - A series of stages of incrementing difficulty that the player traverses
-    \item[] \textit{Spawn Room} - The starting room that the player spawns in when entering a map for the first time
-    \item[] \textit{Inventory} - The space that allows a player to store items, funds, and equipment
-    \item[] \textit{Skills} - Abilities that a player can acquire from playing the game that improve the combat effectiviness of the player
-    \item[] \textit{Entities} - Objects that the player can interact with
-    \item[] \textit{Crafting} - The act of combining two or more items to create a new item
-    \item[] \textit{Ingredients} - The material items that are consumed during crafting
-  \end{itemize}
+  The primary product produced will be a smart phone based application, namely Project Food. The purpose of the application is to provide entertainment to users by means of a 2D video game. Inspired by the popular game "The Binding of Isaac", users will indulge in a classic rogue-like video game experience by controlling a character, attacking enemies, and collecting items all while making decisions to visit unique procedurally-generated levels. In addition, users will have the ability to choose whether or not they wish to combine collected items, allowing them to upgrade features pertaining to their player. Upgrades will allow users to progress through the increasingly difficult levels, preparing them for various final boss fights.
+
+  The application is intended to provide entertainment for all of its users. The application will be free to download from an application store, thereby maximizing the number of players using the application. The main goal of Project Food is to provide users a challenging, immersive, and friendly mobile video game form of entertainment with the classic rogue-like experience.
+  % End SubSection
+  \subsection{Definitions, Acronyms, and Abbreviations}
+  % Begin SubSection
+  { % begin box to localize effect of arraystretch change
+  \renewcommand{\arraystretch}{2.0}
+  \begin{tabu} to 0.8\textwidth { | X[2.0] | X[5] | }
+   \hline
+   \textbf{Term} & Description\\
+   \hline
+   \hline
+   \textbf{Rogue-like}  & A subgenre of role-playing video game. \\
+   \hline
+   \textbf{Procedural Generation} & A method of creating data algorithmically as opposed to manually.\\
+   \hline
+   \textbf{Player} & The central playing piece of the game and the avatar that the user controls to interact with the game.\\
+   \hline
+   \textbf{Map} & A network of interconnected rooms that form the available playing space for the player.\\
+   \hline
+   \textbf{Levels} & A series of stages of incrementing difficulty that the player traverses.\\
+   \hline
+   \textbf{Spawn Rooms} & The starting room that the player spawns in when entering a map for the first time.\\
+   \hline
+   \textbf{Inventory} & The space that allows a player to store items, funds, and equipment.\\
+   \hline
+   \textbf{Skills} & Abilities that a player can acquire from playing the game that improve the combat effectiveness of the player.\\
+   \hline
+   \textbf{Entities} & Objects that the player can interact with.\\
+   \hline
+   \textbf{Crafting} & The act of combining two or more items to create a new item.\\
+   \hline
+   \textbf{Ingredients} & The material items that are consumed during crafting.\\
+   \hline
+  \end{tabu}
+  }
+  % End SubSection
 
   \subsection{References}
+  % Begin SubSection
+  N/A
+  % End SubSection
   \subsection{Overview}
+
+  % Begin SubSection
+  This document is organized into four major sections. Section one (the current section) provided an introduction of Project Food. The remaining three sections of this document are described in detail below. 
+
+  The second section of this document contains the overall description of Project Food. This section will elaborate on the general factors that affect the product and its requirements. This will include the product perspective, the product functions, the user characteristics, constraints, and any relevant assumptions/dependencies.
+
+  The third section of this document contains all of the software functional requirements pertaining to Project Food. These requirements provide the purpose for the products existence as they must meet the clients requirements.
+
+  The fourth section of this document contains a list of the non-functional software requirements pertaining to Project Food. These requirements were created by the development team with the client in mind.
+  % End SubSection
+
+  % End Section
 
 \section{Overall Description}
 
