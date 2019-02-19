@@ -4,7 +4,7 @@ TEST=pytest
 .PHONY: run test
 
 run:
-	$(PY) src
+	$(PY) Food/src
 
 test:
-	$(TEST) src
+	$(TEST) Food/src
