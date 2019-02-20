@@ -9,6 +9,7 @@ from window.constants import *
 ## @brief The class wraps pygame functionallity related to window sprite lists,
 #         clock speed, and rendering to a form that is easier to use for the
 #         project.
+
 class Window:
    
     ## @brief Set the clock and window
