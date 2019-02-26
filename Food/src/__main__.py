@@ -8,21 +8,18 @@
 ###########
 
 import pygame
-from gameLoop.gameloop import *
+from game.gameloop import *
 
 
 ## @brief  Entering point of the game.
 #  @detail Creates game window object and handles pygame.quit
 def main():
-    
+
     # Initialize pygame
     pygame.init()
-    
-    # Initialize game loop
-    game = GameLoop()
 
     # Run game
-    game.run()
+    gameloop()
 
     # IO output
     print("Exited game successfully")
