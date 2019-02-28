@@ -1,0 +1,23 @@
+# User
+
+* Start a game
+* Load a previous game
+* To send input to control the character (Input Commands?)
+* Open menu
+* Close menu
+* Craft items
+* Select shop item
+
+## Extensions of "Start a game"
+
+## Extensions of "Load a previous game"
+
+## Extensions of "Controling the character"
+
+## Extensions of "Open Menu"
+
+## Extensions of "Close Menu"
+
+## Extensions of "Craft Items"
+
+## Extensions of "Select Shop Item"
