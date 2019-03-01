@@ -20,6 +20,7 @@ class eventcontroller:
 
             elif event.type == pygame.KEYDOWN:
                 self.keypress(event)
+
             elif event.type == pygame.KEYUP:
                 self.keyrelease(event)
 
