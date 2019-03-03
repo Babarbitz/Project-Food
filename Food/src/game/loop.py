@@ -4,8 +4,8 @@
 #  @date   February 19, 2019
 
 import window.window as win
-import game.eventcontroller as ec
-from .gamestate import *
+import input.controller as ic
+from .controller import *
 from .render import *
 
 
@@ -14,7 +14,7 @@ def gameloop():
     isRunning = True
 
     window = win.Window()
-    inputController = ec.eventcontroller()
+    inputController = ic.EventController()
 
 
 
