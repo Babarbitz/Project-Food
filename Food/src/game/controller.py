@@ -22,17 +22,17 @@ def gameStateController():
 
 
 def handleEvents(events):
+    pass
+    #for event in events:
 
-    for event in events:
-
-        if event == Event.MOVENORTH:
+     #   if event == Event.MOVENORTH:
             # move player north
 
-        if event == Event.MOVESOUTH:
+      #  if event == Event.MOVESOUTH:
             # move player north
 
-        if event == Event.MOVEEAST:
+       # if event == Event.MOVEEAST:
             # move player north
 
-        if event == Event.MOVEWEST:
+       # if event == Event.MOVEWEST:
             # move player north
