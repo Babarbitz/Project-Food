@@ -1,11 +1,11 @@
-## @file   eventcontroller.py
+## @file   controller.py
 #  @title  Event Controller
 #  @author Lucas Zacharewicz
 #  @date   February 21, 2019
 
 import pygame
 
-class eventcontroller:
+class EventController:
 
     def __init__(self):
         self.exitSignal = False
@@ -27,7 +27,7 @@ class eventcontroller:
 
     # Handles key press events
     def keypress(self,e):
-        pass
+        if e.
 
     # Handles key release events
     def keyrelease(self,e):

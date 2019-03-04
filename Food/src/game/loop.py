@@ -1,5 +1,5 @@
-## @file   gameloop.py
-#  @title  GameLoop
+## @file   loop.py
+#  @title  Loop
 #  @author Lucas Zacharewicz
 #  @date   February 19, 2019
 
