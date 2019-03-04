@@ -11,4 +11,4 @@ import pygame as p
 KEYUP = p.K_e
 KEYDOWN = p.K_d
 KEYLEFT = p.K_s
-KEYRIGHT = p.K-f
+KEYRIGHT = p.K_f

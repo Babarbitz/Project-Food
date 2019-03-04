@@ -4,14 +4,9 @@
 #  @author Lucas Zacharewicz
 #  @date   March 03, 2019
 
-###########
-# Imports #
-###########
-
 from enum import Enum
 
-
-class Event(Enum):
+class InputType(Enum):
     MOVENORTH = 1
     MOVESOUTH = 2
     MOVEEAST  = 3
