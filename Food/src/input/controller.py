@@ -87,3 +87,7 @@ class EventController:
         if i in self.inputs:
             self.inputs.remove(i)
 
+
+
+    def getInputs(self):
+        return self.inputs
