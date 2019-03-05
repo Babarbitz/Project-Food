@@ -6,11 +6,11 @@
 
 import input.event
 
-def gameStateController():
+def gameStateController(inputs):
 
     # perform inputs
 
-    handleEvents("events")
+    handleInputs(inputs)
 
     # Update player state
 
@@ -19,20 +19,5 @@ def gameStateController():
 
 
 
-
-
-def handleEvents(events):
+def handleInputs(inputs):
     pass
-    #for event in events:
-
-     #   if event == Event.MOVENORTH:
-            # move player north
-
-      #  if event == Event.MOVESOUTH:
-            # move player north
-
-       # if event == Event.MOVEEAST:
-            # move player north
-
-       # if event == Event.MOVEWEST:
-            # move player north

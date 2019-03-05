@@ -6,7 +6,6 @@
 import window.window as win
 import input.controller as ic
 from .controller import *
-from .render import *
 
 
 def gameloop():
@@ -23,8 +22,13 @@ def gameloop():
         # Event handling
         inputController.handleEvents()
 
-        # Update game state
+        if inputController.exitSignal:
+            isRunning = False
 
+        # Update game state
+        gameStateController(inputController.inputs)
 
         # Update the sprites and render
-        window.update()
+        window.update([])
+
+
