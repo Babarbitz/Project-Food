@@ -22,6 +22,6 @@ class Window:
     def update(self, spriteList):
 
         self.window.fill((0,0,0))
-       #spriteList.draw(self.window)
+        spriteList.draw(self.window)
         pygame.display.flip()
         self.clock.tick(60)

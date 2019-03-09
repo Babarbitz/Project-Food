@@ -3,10 +3,11 @@
 #  @author Lucas Zacharewicz
 #  @date   February 19, 2019
 
+import pygame
 import window.window as win
 import input.controller as ic
 from .controller import *
-
+import player.controller as pc
 
 def gameloop():
 
@@ -14,8 +15,10 @@ def gameloop():
 
     window = win.Window()
     inputController = ic.EventController()
+    player = pc.Player()
+    spriteList = pygame.sprite.Group()
 
-
+    spriteList.add(player)
 
     while isRunning:
 
@@ -29,6 +32,6 @@ def gameloop():
         gameStateController(inputController.inputs)
 
         # Update the sprites and render
-        window.update([])
+        window.update(spriteList)
 
 
