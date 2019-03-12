@@ -29,7 +29,7 @@ def gameloop():
             isRunning = False
 
         # Update game state
-        gameStateController(inputController.inputs)
+        gameStateController(inputController.inputs, player)
 
         # Update the sprites and render
         window.update(spriteList)

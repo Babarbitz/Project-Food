@@ -6,6 +6,8 @@
 import pygame
 import sprite.extractor as se
 
+PLAYERSPEED = 3
+
 
 class Player(pygame.sprite.Sprite):
 
@@ -18,5 +20,18 @@ class Player(pygame.sprite.Sprite):
         self.image = self.sprites[0]
         self.rect = self.image.get_rect()
 
-        self.xpos = 0.0
-        self.ypos = 0.0
+
+    def moveWest(self):
+        self.rect.x -= PLAYERSPEED
+
+    def moveEast(self):
+        self.rect.x += PLAYERSPEED
+
+    def moveNorth(self):
+        self.rect.y -= PLAYERSPEED
+
+    def moveSouth(self):
+        self.rect.y += PLAYERSPEED
+
+    def attackNorth(self):
+        pass

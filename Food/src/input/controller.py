@@ -37,43 +37,72 @@ class EventController:
     # Handles key press events
     def keyPress(self,e):
 
-        if e.key == KEYUP:
+        if e.key == KEYMOVENORTH:
             self.addInput(InputType.MOVENORTH)
-            print("added key up to tape")
+            print("added move up to tape")
 
-        elif e.key == KEYDOWN:
+        elif e.key == KEYMOVESOUTH:
             self.addInput(InputType.MOVESOUTH)
-            print("added key down to tape")
+            print("added move down to tape")
 
-        elif e.key == KEYLEFT:
-            self.addInput(InputType.MOVEEAST)
-            print("added key left to tape")
-
-        elif e.key == KEYRIGHT:
+        elif e.key == KEYMOVEWEST:
             self.addInput(InputType.MOVEWEST)
-            print("added key right to tape")
+            print("added move left to tape")
 
+        elif e.key == KEYMOVEEAST:
+            self.addInput(InputType.MOVEEAST)
+            print("added move right to tape")
 
+        elif e.key == KEYATTACKNORTH:
+            self.addInput(InputType.ATTACKNORTH)
+            print("added attack right to tape")
+
+        elif e.key == KEYATTACKSOUTH:
+            self.addInput(InputType.ATTACKSOUTH)
+            print("added attack right to tape")
+
+        elif e.key == KEYATTACKWEST:
+            self.addInput(InputType.ATTACKWEST)
+            print("added attack right to tape")
+
+        elif e.key == KEYATTACKEAST:
+            self.addInput(InputType.ATTACKEAST)
+            print("added attack right to tape")
 
     # Handles key release events
     def keyRelease(self,e):
 
-        if e.key == KEYUP:
+        if e.key == KEYMOVENORTH:
             self.removeInput(InputType.MOVENORTH)
-            print("removed key up to tape")
+            print("removed move up to tape")
 
-        elif e.key == KEYDOWN:
+        elif e.key == KEYMOVESOUTH:
             self.removeInput(InputType.MOVESOUTH)
-            print("removed key down to tape")
+            print("removed move down to tape")
 
-        elif e.key == KEYLEFT:
-            self.removeInput(InputType.MOVEEAST)
-            print("removed key left to tape")
-
-        elif e.key == KEYRIGHT:
+        elif e.key == KEYMOVEWEST:
             self.removeInput(InputType.MOVEWEST)
-            print("removed key right to tape")
+            print("removed move left to tape")
 
+        elif e.key == KEYMOVEEAST:
+            self.removeInput(InputType.MOVEEAST)
+            print("removed move right to tape")
+
+        elif e.key == KEYATTACKNORTH:
+            self.removeInput(InputType.ATTACKNORTH)
+            print("added attack right to tape")
+
+        elif e.key == KEYATTACKSOUTH:
+            self.removeInput(InputType.ATTACKSOUTH)
+            print("added attack right to tape")
+
+        elif e.key == KEYATTACKWEST:
+            self.removeInput(InputType.ATTACKWEST)
+            print("added attack right to tape")
+
+        elif e.key == KEYATTACKEAST:
+            self.removeInput(InputType.ATTACKEAST)
+            print("added attack right to tape")
 
 
 

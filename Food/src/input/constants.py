@@ -8,7 +8,11 @@ import pygame as p
 
 # Constants for keycodes
 
-KEYUP = p.K_e
-KEYDOWN = p.K_d
-KEYLEFT = p.K_s
-KEYRIGHT = p.K_f
+KEYMOVENORTH   = p.K_e
+KEYMOVESOUTH   = p.K_d
+KEYMOVEWEST    = p.K_s
+KEYMOVEEAST    = p.K_f
+KEYATTACKNORTH = p.K_i
+KEYATTACKSOUTH = p.K_k
+KEYATTACKWEST  = p.K_j
+KEYATTACKEAST  = p.K_l
