@@ -5,14 +5,12 @@
 
 import pygame
 
-SPRITESIZE = 64
-
 ## @brief This function takes a sprite sheet and returns a list of sprites for
 #         a renderable object
 #
 #  @param f  The file that holds the sprites
 
-def extractSprites(fileName, width, height):
+def extractSprites(fileName, width, height, size):
 
     images = []
 
@@ -21,10 +19,10 @@ def extractSprites(fileName, width, height):
 
     # Split the sheet into individual sprites
 
-    for i in range(0, width-1, SPRITESIZE):
-        for j in range(0, height-1, SPRITESIZE):
-            image = pygame.Surface([SPRITESIZE,SPRITESIZE]).convert()
-            image.blit(spriteSheet, (0,0), (i,j,SPRITESIZE,SPRITESIZE))
+    for x in range(0, width-1, size):
+        for y in range(0, height-1, size):
+            image = pygame.Surface([size,size]).convert()
+            image.blit(spriteSheet, (0,0), (x,y,size,size))
             image.set_colorkey((0,0,0))
             images.append(image)
 

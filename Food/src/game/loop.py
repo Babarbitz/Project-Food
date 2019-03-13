@@ -6,19 +6,29 @@
 import pygame
 import window.window as win
 import input.controller as ic
-from .controller import *
 import player.controller as pc
+import sprite.controller as sc
+
+from .controller import *
 
 def gameloop():
 
+    # Game loop control variable, game exits on false
     isRunning = True
 
+    # Create game window
     window = win.Window()
-    inputController = ic.EventController()
-    player = pc.Player()
-    spriteList = pygame.sprite.Group()
 
-    spriteList.add(player)
+    # Create input controller
+    inputController = ic.EventController()
+
+    # Create a sprite group controller
+    spriteController = sc.SpriteGroupController()
+
+    # Create Player entity
+    player = pc.Player()
+
+    spriteController.add(player)
 
     while isRunning:
 
@@ -29,9 +39,9 @@ def gameloop():
             isRunning = False
 
         # Update game state
-        gameStateController(inputController.inputs, player)
+        gameStateController(inputController.inputs, spriteController,player)
 
         # Update the sprites and render
-        window.update(spriteList)
+        window.update(spriteController.renderedEntities)
 
 

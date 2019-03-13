@@ -90,19 +90,19 @@ class EventController:
 
         elif e.key == KEYATTACKNORTH:
             self.removeInput(InputType.ATTACKNORTH)
-            print("added attack right to tape")
+            print("removed attack up to tape")
 
         elif e.key == KEYATTACKSOUTH:
             self.removeInput(InputType.ATTACKSOUTH)
-            print("added attack right to tape")
+            print("removed attack down to tape")
 
         elif e.key == KEYATTACKWEST:
             self.removeInput(InputType.ATTACKWEST)
-            print("added attack right to tape")
+            print("removed attack left to tape")
 
         elif e.key == KEYATTACKEAST:
             self.removeInput(InputType.ATTACKEAST)
-            print("added attack right to tape")
+            print("removed attack right to tape")
 
 
 

@@ -7,20 +7,18 @@
 import input.event as ie
 
 
-def gameStateController(inputs, player):
+def gameStateController(inputs, sc, player):
 
     # perform inputs
 
-    handleInputs(inputs, player)
-
-    # Update player state
+    handleInputs(inputs, sc, player)
 
 
     # Update enemy state
 
+    sc.updatedEntities.update()
 
-
-def handleInputs(inputs, player):
+def handleInputs(inputs, sc, player):
 
     for event in inputs:
 
@@ -36,3 +34,14 @@ def handleInputs(inputs, player):
         elif event == ie.InputType.MOVEWEST:
             player.moveWest()
 
+        elif event == ie.InputType.ATTACKNORTH:
+            player.attackNorth(sc)
+
+        elif event == ie.InputType.ATTACKSOUTH:
+            player.attackSouth(sc)
+
+        elif event == ie.InputType.ATTACKEAST:
+            player.attackEast(sc)
+
+        elif event == ie.InputType.ATTACKWEST:
+            player.attackWest(sc)
