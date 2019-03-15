@@ -10,10 +10,19 @@ import sprite.extractor as se
 import projectile.controller as pr
 
 # Constants
-PLAYERSPEED = 3
-PROJECTILESPEED = 4
-SPRITE = 'Food/assets/Chef.png'
-PROJECTILESPRITE = 'Food/assets/knife.png'
+PL_SPEED = 3
+PR_SPEED = 4
+PL_SPRITE = 'Food/assets/Chef.png'
+PL_SPRITESIZE = 64
+PL_SPRITESHEET = (64,64)
+PR_SPRITE = 'Food/assets/knife.png'
+PR_SPRITESIZE = 16
+PR_SPRITESHEET = (16,16)
+
+# ATTACK SPAWNS
+
+# Centers the sprite in the view
+OFFSET = (PL_SPRITESIZE/2) - (PR_SPRITESIZE/2)
 
 class Player(pygame.sprite.Sprite):
 
@@ -27,8 +36,8 @@ class Player(pygame.sprite.Sprite):
         super().__init__()
 
         # Get sprites
-        self.sprites = se.extractSprites(SPRITE,64,64,64)
-        self.projectileSprites = se.extractSprites(PROJECTILESPRITE,64,16,16)
+        self.sprites = se.extractSprites(PL_SPRITE,64,64,64)
+        self.projectileSprites = se.extractSprites(PR_SPRITE,64,16,16)
 
         self.image = self.sprites[0]
         self.rect = self.image.get_rect()
@@ -45,24 +54,21 @@ class Player(pygame.sprite.Sprite):
         # Create Frame Counter
         self.frame = 0
 
-        # Create empty list of projectiles
-        self.projectiles = []
-
 ################################################################################
 # Movement #
 ################################################################################
 
     def moveWest(self):
-        self.rect.x -= PLAYERSPEED
+        self.rect.x -= PL_SPEED
 
     def moveEast(self):
-        self.rect.x += PLAYERSPEED
+        self.rect.x += PL_SPEED
 
     def moveNorth(self):
-        self.rect.y -= PLAYERSPEED
+        self.rect.y -= PL_SPEED
 
     def moveSouth(self):
-        self.rect.y += PLAYERSPEED
+        self.rect.y += PL_SPEED
 
 ################################################################################
 # Basic Attacks #
@@ -71,24 +77,22 @@ class Player(pygame.sprite.Sprite):
     def attackNorth(self, sc):
 
         if not self.attackCooldown:
-            temp = pr.Projectile(self.rect.x, self.rect.y, 0, -PROJECTILESPEED,
+            temp = pr.Projectile(self.rect.x + OFFSET, self.rect.y, 0, -PR_SPEED,
                     self.projectileSprites[0])
 
             sc.add(temp)
-            self.projectiles.append(temp)
+            #self.projectiles.append(temp)
 
             self.attackCooldown = True
             self.attackCooldownFrame = self.frame
 
-
     def attackSouth(self, sc):
 
         if not self.attackCooldown:
-            temp = pr.Projectile(self.rect.x, self.rect.y, 0, PROJECTILESPEED,
+            temp = pr.Projectile(self.rect.x + OFFSET, self.rect.y + 64, 0, PR_SPEED,
                     self.projectileSprites[1])
 
             sc.add(temp)
-            self.projectiles.append(temp)
 
             self.attackCooldown = True
             self.attackCooldownFrame = self.frame
@@ -96,7 +100,7 @@ class Player(pygame.sprite.Sprite):
     def attackWest(self, sc):
 
         if not self.attackCooldown:
-            temp = pr.Projectile(self.rect.x, self.rect.y, -PROJECTILESPEED, 0,
+            temp = pr.Projectile(self.rect.x, self.rect.y, -PR_SPEED, 0,
                     self.projectileSprites[2])
 
             sc.add(temp)
@@ -108,7 +112,7 @@ class Player(pygame.sprite.Sprite):
     def attackEast(self, sc):
 
         if not self.attackCooldown:
-            temp = pr.Projectile(self.rect.x, self.rect.y, PROJECTILESPEED, 0,
+            temp = pr.Projectile(self.rect.x, self.rect.y, PR_SPEED, 0,
                     self.projectileSprites[3])
 
             sc.add(temp)
