@@ -10,7 +10,7 @@ import pygame
 #
 #  @param f  The file that holds the sprites
 
-def extractSprites(fileName, width, height, size):
+def extractSprites(fileName, size, step):
 
     images = []
 
@@ -19,10 +19,10 @@ def extractSprites(fileName, width, height, size):
 
     # Split the sheet into individual sprites
 
-    for x in range(0, width-1, size):
-        for y in range(0, height-1, size):
-            image = pygame.Surface([size,size]).convert()
-            image.blit(spriteSheet, (0,0), (x,y,size,size))
+    for x in range(0, size[0] - 1, step):
+        for y in range(0, size[1] - 1, step):
+            image = pygame.Surface([step,step]).convert()
+            image.blit(spriteSheet, (0,0), (x,y,step,step))
             image.set_colorkey((0,0,0))
             images.append(image)
 
