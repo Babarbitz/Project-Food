@@ -11,18 +11,18 @@ import projectile.controller as pr
 
 # Constants
 PL_SPEED = 3
-PR_SPEED = 4
+PR_SPEED = 8
 PL_SPRITE = 'Food/assets/Chef.png'
-PL_SPRITESIZE = 64
-PL_SPRITESHEET = (64,64)
+PL_STEP = 64
+PL_SIZE = (64,64)
 PR_SPRITE = 'Food/assets/knife.png'
-PR_SPRITESIZE = 16
-PR_SPRITESHEET = (16,16)
+PR_STEP = 32
+PR_SIZE = (128,32)
 
 # ATTACK SPAWNS
 
 # Centers the sprite in the view
-OFFSET = (PL_SPRITESIZE/2) - (PR_SPRITESIZE/2)
+OFFSET = (PL_STEP/2) - (PR_STEP/2)
 
 class Player(pygame.sprite.Sprite):
 
@@ -36,8 +36,8 @@ class Player(pygame.sprite.Sprite):
         super().__init__()
 
         # Get sprites
-        self.sprites = se.extractSprites(PL_SPRITE,64,64,64)
-        self.projectileSprites = se.extractSprites(PR_SPRITE,64,16,16)
+        self.sprites = se.extractSprites(PL_SPRITE,PL_SIZE,PL_STEP)
+        self.projectileSprites = se.extractSprites(PR_SPRITE,PR_SIZE,PR_STEP)
 
         self.image = self.sprites[0]
         self.rect = self.image.get_rect()
@@ -81,7 +81,6 @@ class Player(pygame.sprite.Sprite):
                     self.projectileSprites[0])
 
             sc.add(temp)
-            #self.projectiles.append(temp)
 
             self.attackCooldown = True
             self.attackCooldownFrame = self.frame
@@ -89,7 +88,8 @@ class Player(pygame.sprite.Sprite):
     def attackSouth(self, sc):
 
         if not self.attackCooldown:
-            temp = pr.Projectile(self.rect.x + OFFSET, self.rect.y + 64, 0, PR_SPEED,
+            temp = pr.Projectile(self.rect.x + OFFSET, self.rect.y +
+                    PL_STEP, 0, PR_SPEED,
                     self.projectileSprites[1])
 
             sc.add(temp)
@@ -100,11 +100,10 @@ class Player(pygame.sprite.Sprite):
     def attackWest(self, sc):
 
         if not self.attackCooldown:
-            temp = pr.Projectile(self.rect.x, self.rect.y, -PR_SPEED, 0,
+            temp = pr.Projectile(self.rect.x, self.rect.y + OFFSET, -PR_SPEED, 0,
                     self.projectileSprites[2])
 
             sc.add(temp)
-            self.projectiles.append(temp)
 
             self.attackCooldown = True
             self.attackCooldownFrame = self.frame
@@ -112,11 +111,11 @@ class Player(pygame.sprite.Sprite):
     def attackEast(self, sc):
 
         if not self.attackCooldown:
-            temp = pr.Projectile(self.rect.x, self.rect.y, PR_SPEED, 0,
+            temp = pr.Projectile(self.rect.x + PL_STEP, self.rect.y +
+                    OFFSET, PR_SPEED, 0,
                     self.projectileSprites[3])
 
             sc.add(temp)
-            self.projectiles.append(temp)
 
             self.attackCooldown = True
             self.attackCooldownFrame = self.frame
