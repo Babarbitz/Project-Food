@@ -6,6 +6,7 @@
 
 # Imports
 import pygame
+import game.identifiers as gi
 import sprite.extractor as se
 import projectile.controller as pr
 
@@ -29,7 +30,7 @@ class Player(pygame.sprite.Sprite):
 #                                 Initializer                                  #
 ################################################################################
 
-    def __init__(self):
+    def __init__(self, cList):
 
         # Call parent constructor
         super().__init__()
@@ -38,6 +39,7 @@ class Player(pygame.sprite.Sprite):
         self.plSprites = se.extractSprites(PL_SPRITE,PL_SIZE,PL_STEP)
         self.prSprites = se.extractSprites(PR_SPRITE,PR_SIZE,PR_STEP)
 
+        # Set default Sprite, Make rectangle
         self.image = self.plSprites[0]
         self.rect = self.image.get_rect()
 
@@ -49,6 +51,12 @@ class Player(pygame.sprite.Sprite):
         # Etablish player states
         self.attackCooldown = False
         self.attackCooldownFrame = 0
+
+        # Set Collision list
+        self.cList = cList
+
+        # Give player Identifier
+        self.id = gi.Id.PLAYER
 
         # Create Frame Counter
         self.frame = 0
@@ -119,7 +127,17 @@ class Player(pygame.sprite.Sprite):
             self.attackCooldown = True
             self.attackCooldownFrame = self.frame
 
-################################################################################
+###############################################################################
+#                           Collision Rules                                   #
+###############################################################################
+
+    def checkCollision(self):
+
+        collisions = pygame.sprite.spritecollide(self,self.cList,False)
+
+        for i in collisions:
+            if (i.id == gi.Id.WALL):
+                i.collision(self)
 
     def checkStates(self):
 
@@ -127,5 +145,8 @@ class Player(pygame.sprite.Sprite):
             self.attackCooldown = False
 
     def update(self):
+        self.oldx = self.rect.x
+        self.oldy = self.rect.y
         self.checkStates()
+        self.checkCollision()
         self.frame += 1

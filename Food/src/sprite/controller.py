@@ -21,3 +21,10 @@ class SpriteGroupController():
            self.updatedEntities.add(entity)
         if entity.collidable:
            self.collidableEntities.add(entity)
+
+    # Runs updates for all sprite group
+    def update(self):
+
+        self.updatedEntities.update()
+
+

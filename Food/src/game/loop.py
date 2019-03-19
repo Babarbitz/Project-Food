@@ -8,6 +8,7 @@ import window.window as win
 import input.controller as ic
 import player.controller as pc
 import sprite.controller as sc
+import map.room as mr
 
 from .controller import *
 
@@ -26,7 +27,12 @@ def gameloop():
     spriteController = sc.SpriteGroupController()
 
     # Create Player entity
-    player = pc.Player()
+    player = pc.Player(spriteController.collidableEntities)
+
+    # Create Room
+    room = mr.Room()
+
+    room.addToController(spriteController)
 
     spriteController.add(player)
 

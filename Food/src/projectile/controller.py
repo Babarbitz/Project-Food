@@ -4,6 +4,7 @@
 #  @date   March 08, 2019
 
 import pygame
+import game.identifiers as gi
 
 class Projectile(pygame.sprite.Sprite):
 
@@ -33,6 +34,15 @@ class Projectile(pygame.sprite.Sprite):
     def move(self):
         self.rect.x += self.xspeed
         self.rect.y += self.yspeed
+
+    def checkCollision(self, collidables):
+
+        collisions = pygame.sprite.spritecollide(self, collidables, False)
+
+        for c in collisions:
+            print(c)
+            if (c.id == gi.Id.WALL):
+                self.kill()
 
     def update(self):
         self.move()
