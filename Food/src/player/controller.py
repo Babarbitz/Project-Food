@@ -141,7 +141,7 @@ class Player(pygame.sprite.Sprite):
 
     def checkStates(self):
 
-        if self.frame - self.attackCooldownFrame > 20:
+        if self.frame - self.attackCooldownFrame > 20: #<- attack cool down
             self.attackCooldown = False
 
     def update(self):
