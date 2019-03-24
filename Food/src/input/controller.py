@@ -13,8 +13,8 @@ class EventController:
 
 
     def __init__(self):
-        self._exitSignal = False
-        self._inputs = []
+        self.exitSignal = False
+        self.inputs = []
 
 
 
@@ -115,17 +115,3 @@ class EventController:
     def removeInput(self, i):
         if i in self.inputs:
             self.inputs.remove(i)
-
-
-    @property
-    def inputs(self):
-        return self._inputs
-
-
-    @property
-    def exitSignal(self):
-        return self._exitSignal
-
-    @exitSignal.setter
-    def exitSignal(self, val):
-        self._exitSignal = val

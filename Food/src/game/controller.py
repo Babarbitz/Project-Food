@@ -13,6 +13,9 @@ def gameStateController(inputs, sc, player):
 
     handleInputs(inputs, sc, player)
 
+    # Update Controllers
+
+    player.update()
 
     # Update enemy state
 

@@ -27,14 +27,14 @@ def gameloop():
     spriteController = sc.SpriteGroupController()
 
     # Create Player entity
-    player = pc.Player(spriteController.collidableEntities)
+    playerController = pc.PlayerController(spriteController.collidableEntities)
 
     # Create Room
     room = mr.Room()
 
     room.addToController(spriteController)
 
-    spriteController.add(player)
+    playerController.addToController(spriteController)
 
     while isRunning:
 
@@ -45,7 +45,8 @@ def gameloop():
             isRunning = False
 
         # Update game state
-        gameStateController(inputController.inputs, spriteController,player)
+        gameStateController(inputController.inputs, spriteController,
+                playerController)
 
         # Update the sprites and render
         window.update(spriteController.renderedEntities)
