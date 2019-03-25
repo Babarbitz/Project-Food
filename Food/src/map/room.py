@@ -24,7 +24,7 @@ class Room():
         self.walls.append(Wall([0,0],[128,896]))
         self.walls.append(Wall([0,0],[1280,128]))
         self.walls.append(Wall([1152,0],[128,896]))
-        self.walls.append(Wall([0,768],[128,896]))
+        self.walls.append(Wall([0,768],[896,128]))
         #structures
         self.structures = []
 
