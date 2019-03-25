@@ -8,7 +8,7 @@ import game.identifiers as gi
 
 class Projectile(pygame.sprite.Sprite):
 
-    def __init__(self,x,y,xspeed,yspeed, sprite):
+    def __init__(self, x, y, xspeed, yspeed, sprite, cList):
 
         super().__init__()
 
@@ -28,6 +28,9 @@ class Projectile(pygame.sprite.Sprite):
         self.xspeed = xspeed
         self.yspeed = yspeed
 
+        self.id = gi.Id.PROJECTILE
+        self.cList = cList
+
         # TODO
         # Set game attributes like damage
 
@@ -35,9 +38,9 @@ class Projectile(pygame.sprite.Sprite):
         self.rect.x += self.xspeed
         self.rect.y += self.yspeed
 
-    def checkCollision(self, collidables):
+    def checkCollision(self):
 
-        collisions = pygame.sprite.spritecollide(self, collidables, False)
+        collisions = pygame.sprite.spritecollide(self, self.cList, False)
 
         for c in collisions:
             print(c)
@@ -46,3 +49,4 @@ class Projectile(pygame.sprite.Sprite):
 
     def update(self):
         self.move()
+        self.checkCollision()

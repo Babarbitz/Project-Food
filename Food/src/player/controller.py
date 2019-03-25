@@ -75,7 +75,7 @@ class PlayerController(pygame.sprite.Sprite):
 
         if not self.player.attackCooldown:
             temp = pr.Projectile(self.player.rect.x + OFFSET, self.player.rect.y, 0, -PR_SPEED,
-                    self.prSprites[0])
+                    self.prSprites[0],self.cList)
 
             sc.add(temp)
 
@@ -86,8 +86,7 @@ class PlayerController(pygame.sprite.Sprite):
 
         if not self.player.attackCooldown:
             temp = pr.Projectile(self.player.rect.x + OFFSET, self.player.rect.y +
-                    PL_STEP[0], 0, PR_SPEED,
-                    self.prSprites[1])
+                    PL_STEP[0], 0, PR_SPEED, self.prSprites[1], self.cList)
 
             sc.add(temp)
 
@@ -98,7 +97,7 @@ class PlayerController(pygame.sprite.Sprite):
 
         if not self.player.attackCooldown:
             temp = pr.Projectile(self.player.rect.x, self.player.rect.y + OFFSET, -PR_SPEED, 0,
-                    self.prSprites[2])
+                    self.prSprites[2],self.cList)
 
             sc.add(temp)
 
@@ -110,7 +109,7 @@ class PlayerController(pygame.sprite.Sprite):
         if not self.player.attackCooldown:
             temp = pr.Projectile(self.player.rect.x + PL_STEP[0], self.player.rect.y +
                     OFFSET, PR_SPEED, 0,
-                    self.prSprites[3])
+                    self.prSprites[3],self.cList)
 
             sc.add(temp)
 

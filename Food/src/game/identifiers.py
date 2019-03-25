@@ -10,3 +10,4 @@ class Id(Enum):
     ENEMY       = 2
     STRUCTURE   = 3
     WALL        = 4
+    PROJECTILE  = 5
