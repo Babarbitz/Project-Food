@@ -18,6 +18,8 @@ PR_SPEED = 8
 PR_STEP = (32,32)
 PR_SIZE = (128,32)
 
+PR_LEFT = ()
+
 PL_SPRITE = 'Food/assets/Chef.png'
 PL_STEP = (64,64)
 PL_SIZE = (64,64)
@@ -73,46 +75,47 @@ class PlayerController(pygame.sprite.Sprite):
 
     def attackNorth(self, sc):
 
-        if not self.player.attackCooldown:
-            temp = pr.Projectile(self.player.rect.x + OFFSET, self.player.rect.y, 0, -PR_SPEED,
-                    self.prSprites[0],self.cList)
-
-            sc.add(temp)
-
-            self.player.attackCooldown = True
-            self.player.attackCooldownFrame = self.frame
+        self.attack(self.player.rect.x + OFFSET,
+                    self.player.rect.y,
+                    0,
+                    -PR_SPEED,
+                    self.prSprites[0],
+                    sc)
 
     def attackSouth(self, sc):
 
-        if not self.player.attackCooldown:
-            temp = pr.Projectile(self.player.rect.x + OFFSET, self.player.rect.y +
-                    PL_STEP[0], 0, PR_SPEED, self.prSprites[1], self.cList)
-
-            sc.add(temp)
-
-            self.player.attackCooldown = True
-            self.player.attackCooldownFrame = self.frame
+        self.attack(self.player.rect.x + OFFSET,
+                    self.player.rect.y + PL_STEP[0],
+                    0,
+                    PR_SPEED,
+                    self.prSprites[1],
+                    sc)
 
     def attackWest(self, sc):
 
-        if not self.player.attackCooldown:
-            temp = pr.Projectile(self.player.rect.x, self.player.rect.y + OFFSET, -PR_SPEED, 0,
-                    self.prSprites[2],self.cList)
+        self.attack(self.player.rect.x,
+                    self.player.rect.y + OFFSET,
+                    -PR_SPEED,
+                    0,
+                    self.prSprites[2],
+                    sc)
 
-            sc.add(temp)
-
-            self.player.attackCooldown = True
-            self.player.attackCooldownFrame = self.frame
 
     def attackEast(self, sc):
 
+        self.attack(self.player.rect.x + PL_STEP[0],
+                    self.player.rect.y + OFFSET,
+                    PR_SPEED,
+                    0,
+                    self.prSprites[3],
+                    sc)
+
+
+    def attack(self, x, y, xs, ys, sprite, sc):
+
         if not self.player.attackCooldown:
-            temp = pr.Projectile(self.player.rect.x + PL_STEP[0], self.player.rect.y +
-                    OFFSET, PR_SPEED, 0,
-                    self.prSprites[3],self.cList)
-
+            temp = pr.Projectile(x, y, xs, ys, sprite, self.cList)
             sc.add(temp)
-
             self.player.attackCooldown = True
             self.player.attackCooldownFrame = self.frame
 

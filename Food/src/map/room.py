@@ -32,7 +32,7 @@ class Room():
 
         #doors
 
-    def addToController(self, sc):
+    def render(self, sc):
 
         sc.add(self.background)
 

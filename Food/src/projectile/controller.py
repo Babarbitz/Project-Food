@@ -43,7 +43,6 @@ class Projectile(pygame.sprite.Sprite):
         collisions = pygame.sprite.spritecollide(self, self.cList, False)
 
         for c in collisions:
-            print(c)
             if (c.id == gi.Id.WALL):
                 self.kill()
 

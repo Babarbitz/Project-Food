@@ -32,7 +32,7 @@ def gameloop():
     # Create Room
     room = mr.Room()
 
-    room.addToController(spriteController)
+    room.render(spriteController)
 
     playerController.addToController(spriteController)
 
