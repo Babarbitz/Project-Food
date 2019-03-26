@@ -36,6 +36,8 @@ def gameloop():
 
     playerController.addToController(spriteController)
 
+    playerController.setPosition(400,400)
+
     while isRunning:
 
         # Event handling

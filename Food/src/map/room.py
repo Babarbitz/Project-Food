@@ -66,7 +66,7 @@ class Structure(pygame.sprite.Sprite):
 
         super().__init__()
 
-        self.sSprite = se.extractSprites(sprite, size, size)
+        #self.Sprite = se.extractSprites(sprite, size, size)
         self.image = self.sSprites[0]
 
         self.rect = self.image.get_rect()
@@ -99,7 +99,22 @@ class Wall(pygame.sprite.Sprite):
         self.updatable  = False
         self.collidable = True
 
-    def collision(self, i):
+class Door(pygame.sprite.Sprite):
 
-        print("hitting wall")
+    def __init__(self,pos,size,sprite):
 
+        super().__init__()
+
+        self.Sprite = se.extractSprites(sprite, size, size)
+        self.image = self.sSprites[0]
+
+        self.rect = self.image.get_rect()
+        self.rect.x = pos[0]
+        self.rect.y = pos[1]
+
+        self.id = gi.Id.STRUCTURE
+
+        # Set flags for the spriteController
+        self.renderable = True
+        self.updatable  = False
+        self.collidable = True

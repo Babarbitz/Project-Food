@@ -51,10 +51,12 @@ class PlayerController(pygame.sprite.Sprite):
         # Create Frame Counter
         self.frame = 0
 
-        self.direction = gi.Direction.NORTH
-
     def addToController(self, sc):
         sc.add(self.player)
+
+    def setPosition(self, x, y):
+        self.player.rect.x = x
+        self.player.rect.y = y
 
 ################################################################################
 #                                  Movement                                    #
@@ -72,6 +74,7 @@ class PlayerController(pygame.sprite.Sprite):
     def moveSouth(self):
         self.player.rect.y += PL_SPEED
 
+
 ################################################################################
 #                               Basic Attacks                                  #
 ################################################################################
@@ -84,7 +87,6 @@ class PlayerController(pygame.sprite.Sprite):
                     -PR_SPEED,
                     self.prSprites[0],
                     sc)
-        self.direction = gi.Direction.NORTH
 
     def attackSouth(self, sc):
 
@@ -94,7 +96,6 @@ class PlayerController(pygame.sprite.Sprite):
                     PR_SPEED,
                     self.prSprites[1],
                     sc)
-        self.direction = gi.Direction.SOUTH
 
     def attackWest(self, sc):
 
@@ -104,7 +105,6 @@ class PlayerController(pygame.sprite.Sprite):
                     0,
                     self.prSprites[2],
                     sc)
-        self.direction = gi.Direction.WEST
 
     def attackEast(self, sc):
 
@@ -114,7 +114,6 @@ class PlayerController(pygame.sprite.Sprite):
                     0,
                     self.prSprites[3],
                     sc)
-        self.direction = gi.Direction.EAST
 
     def attack(self, x, y, xs, ys, sprite, sc):
 
@@ -138,18 +137,17 @@ class PlayerController(pygame.sprite.Sprite):
 
     def collideWall(self,wall):
 
-        if self.direction == gi.Direction.NORTH:
-            self.player.rect.top = wall.rect.bottom
+        if self.player.rect.x + self.player.rect.width < wall.rect.x:
+            self.player.rect.x = wall.rect.x - self.player.rect.width
 
-        elif self.direction == gi.Direction.SOUTH:
-            self.player.rect.bottom = wall.rect.top
+        if self.player.rect.x > wall.rect.x + wall.rect.width:
+            self.player.rect.x = wall.rect.x - wall.rect.width
 
-        elif self.direction == gi.Direction.EAST:
-            self.player.rect.right = wall.rect.left
+        if self.player.rect.y + self.player.rect.height < wall.rect.y:
+            self.player.rect.y = wall.rect.y - self.player.rect.height
 
-        elif self.direction == gi.Direction.NORTH:
-            self.player.rect.top = wall.rect.right
-
+        if self.player.rect.y > wall.rect.y + wall.rect.height:
+            self.player.rect.y = wall.rect.y + wall.rect.height
 
     def checkStates(self):
 
