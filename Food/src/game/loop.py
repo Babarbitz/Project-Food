@@ -5,7 +5,7 @@
 
 import pygame
 import window.window as win
-import input.controller as ic
+import input
 import player.controller as pc
 import sprite.controller as sc
 import map.room as mr
@@ -21,7 +21,7 @@ def gameloop():
     window = win.Window()
 
     # Create input controller
-    inputController = ic.EventController()
+    inputController = input.InputController()
 
     # Create a sprite group controller
     spriteController = sc.SpriteGroupController()
@@ -41,7 +41,7 @@ def gameloop():
     while isRunning:
 
         # Event handling
-        inputController.handleEvents()
+        inputController.gatherInputs()
 
         if inputController.exitSignal:
             isRunning = False
@@ -52,5 +52,3 @@ def gameloop():
 
         # Update the sprites and render
         window.update(spriteController.renderedEntities)
-
-

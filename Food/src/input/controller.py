@@ -4,21 +4,18 @@
 #  @date   February 21, 2019
 
 import pygame
-from .event import *
-from .constants import *
+from .inputs import *
 
 
-class EventController:
+class InputController:
 
-
-
+    # Initalizer
     def __init__(self):
         self.exitSignal = False
         self.inputs = []
 
-
-
-    def handleEvents(self):
+    # Updates the input list with new keyboard inputs
+    def gatherInputs(self):
 
         for event in pygame.event.get():
 
@@ -33,85 +30,68 @@ class EventController:
                 self.keyRelease(event)
 
 
-
-    # Handles key press events
+    # Adds inputs to the input list
     def keyPress(self,e):
 
         if e.key == KEYMOVENORTH:
-            self.addInput(InputType.MOVENORTH)
-            print("added move up to tape")
+            self.addInput(Input.MOVENORTH)
 
         elif e.key == KEYMOVESOUTH:
-            self.addInput(InputType.MOVESOUTH)
-            print("added move down to tape")
+            self.addInput(Input.MOVESOUTH)
 
         elif e.key == KEYMOVEWEST:
-            self.addInput(InputType.MOVEWEST)
-            print("added move left to tape")
+            self.addInput(Input.MOVEWEST)
 
         elif e.key == KEYMOVEEAST:
-            self.addInput(InputType.MOVEEAST)
-            print("added move right to tape")
+            self.addInput(Input.MOVEEAST)
 
         elif e.key == KEYATTACKNORTH:
-            self.addInput(InputType.ATTACKNORTH)
-            print("added attack right to tape")
+            self.addInput(Input.ATTACKNORTH)
 
         elif e.key == KEYATTACKSOUTH:
-            self.addInput(InputType.ATTACKSOUTH)
-            print("added attack right to tape")
+            self.addInput(Input.ATTACKSOUTH)
 
         elif e.key == KEYATTACKWEST:
-            self.addInput(InputType.ATTACKWEST)
-            print("added attack right to tape")
+            self.addInput(Input.ATTACKWEST)
 
         elif e.key == KEYATTACKEAST:
-            self.addInput(InputType.ATTACKEAST)
-            print("added attack right to tape")
+            self.addInput(Input.ATTACKEAST)
 
-    # Handles key release events
+
+    # Removes inputs from the input list
     def keyRelease(self,e):
 
         if e.key == KEYMOVENORTH:
-            self.removeInput(InputType.MOVENORTH)
-            print("removed move up to tape")
+            self.removeInput(Input.MOVENORTH)
 
         elif e.key == KEYMOVESOUTH:
-            self.removeInput(InputType.MOVESOUTH)
-            print("removed move down to tape")
+            self.removeInput(Input.MOVESOUTH)
 
         elif e.key == KEYMOVEWEST:
-            self.removeInput(InputType.MOVEWEST)
-            print("removed move left to tape")
+            self.removeInput(Input.MOVEWEST)
 
         elif e.key == KEYMOVEEAST:
-            self.removeInput(InputType.MOVEEAST)
-            print("removed move right to tape")
+            self.removeInput(Input.MOVEEAST)
 
         elif e.key == KEYATTACKNORTH:
-            self.removeInput(InputType.ATTACKNORTH)
-            print("removed attack up to tape")
+            self.removeInput(Input.ATTACKNORTH)
 
         elif e.key == KEYATTACKSOUTH:
-            self.removeInput(InputType.ATTACKSOUTH)
-            print("removed attack down to tape")
+            self.removeInput(Input.ATTACKSOUTH)
 
         elif e.key == KEYATTACKWEST:
-            self.removeInput(InputType.ATTACKWEST)
-            print("removed attack left to tape")
+            self.removeInput(Input.ATTACKWEST)
 
         elif e.key == KEYATTACKEAST:
-            self.removeInput(InputType.ATTACKEAST)
-            print("removed attack right to tape")
+            self.removeInput(Input.ATTACKEAST)
 
-
-
+    # Adds input (i) to the tape iff it is not in the tape
     def addInput(self, i):
         if not i in self.inputs:
             self.inputs.append(i)
 
 
-
+    # Removes input (i) from the input list iff it is in the list
     def removeInput(self, i):
         if i in self.inputs:
             self.inputs.remove(i)

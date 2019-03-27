@@ -6,6 +6,7 @@
 
 # Imports
 import pygame
+import input
 from .abstract import *
 import game.identifiers as gi
 import sprite.extractor as se
@@ -77,7 +78,6 @@ class PlayerController(pygame.sprite.Sprite):
     def moveSouth(self):
         self.player.rect.y += PL_SPEED
 
-
 ################################################################################
 #                               Basic Attacks                                  #
 ################################################################################
@@ -136,20 +136,23 @@ class PlayerController(pygame.sprite.Sprite):
 
         for i in collisions:
             if (i.id == gi.Id.WALL):
-                print("wall")
-                self.player.rect.x = 400
-                self.player.rect.y = 400
                 self.collideWall(i)
 
     def collideWall(self,wall):
 
+        print("hit")
+
         if(self.oldx + self.player.rect.width <= wall.rect.x):
+            print('collide left')
             self.player.rect.x = wall.rect.x - self.player.rect.width
         elif(self.oldx >= wall.rect.x + wall.rect.width):
+            print('collide right')
             self.player.rect.x = wall.rect.x + wall.rect.width
         elif(self.oldy + self.player.rect.height <= wall.rect.y):
+            print('collide top')
             self.player.rect.y = wall.rect.y - self.player.rect.height
         elif(self.oldy >= wall.rect.y + wall.rect.height):
+            print('collide bottom')
             self.player.rect.y = wall.rect.y + wall.rect.height
 
     def checkStates(self):
@@ -157,10 +160,42 @@ class PlayerController(pygame.sprite.Sprite):
         if self.frame - self.player.attackCooldownFrame > 20: #<- attack cool down
             self.player.attackCooldown = False
 
-    def update(self):
+
+    def handleInputs(self, inputs, sc):
+
+        for event in inputs:
+
+            if event == input.Input.MOVENORTH:
+                self.moveNorth()
+
+            elif event == input.Input.MOVESOUTH:
+                self.moveSouth()
+
+            elif event == input.Input.MOVEEAST:
+                self.moveEast()
+
+            elif event == input.Input.MOVEWEST:
+                self.moveWest()
+
+            elif event == input.Input.ATTACKNORTH:
+                self.attackNorth(sc)
+
+            elif event == input.Input.ATTACKSOUTH:
+                self.attackSouth(sc)
+
+            elif event == input.Input.ATTACKEAST:
+                self.attackEast(sc)
+
+            elif event == input.Input.ATTACKWEST:
+                self.attackWest(sc)
+
+
+    def update(self, sc, inputs):
 
         self.oldx = self.player.rect.x
         self.oldy = self.player.rect.y
+
+        self.handleInputs(sc, inputs)
 
         self.checkStates()
         self.checkCollision()

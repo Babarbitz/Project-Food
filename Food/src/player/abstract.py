@@ -12,7 +12,6 @@ PL_SPEED = 3
 PL_MAXHP = 4
 
 
-
 class Player(pygame.sprite.Sprite):
 
     def __init__(self, image):
