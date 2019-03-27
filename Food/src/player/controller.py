@@ -45,6 +45,9 @@ class PlayerController(pygame.sprite.Sprite):
         # Player information
         self.player = Player(self.plSprites[0])
 
+        self.oldx = 0
+        self.oldy = 0
+
         # Set Collision list
         self.cList = cList
 
@@ -133,20 +136,20 @@ class PlayerController(pygame.sprite.Sprite):
 
         for i in collisions:
             if (i.id == gi.Id.WALL):
+                print("wall")
+                self.player.rect.x = 400
+                self.player.rect.y = 400
                 self.collideWall(i)
 
     def collideWall(self,wall):
 
-        if self.player.rect.x + self.player.rect.width < wall.rect.x:
+        if(self.oldx + self.player.rect.width <= wall.rect.x):
             self.player.rect.x = wall.rect.x - self.player.rect.width
-
-        if self.player.rect.x > wall.rect.x + wall.rect.width:
-            self.player.rect.x = wall.rect.x - wall.rect.width
-
-        if self.player.rect.y + self.player.rect.height < wall.rect.y:
+        elif(self.oldx >= wall.rect.x + wall.rect.width):
+            self.player.rect.x = wall.rect.x + wall.rect.width
+        elif(self.oldy + self.player.rect.height <= wall.rect.y):
             self.player.rect.y = wall.rect.y - self.player.rect.height
-
-        if self.player.rect.y > wall.rect.y + wall.rect.height:
+        elif(self.oldy >= wall.rect.y + wall.rect.height):
             self.player.rect.y = wall.rect.y + wall.rect.height
 
     def checkStates(self):
@@ -155,6 +158,11 @@ class PlayerController(pygame.sprite.Sprite):
             self.player.attackCooldown = False
 
     def update(self):
+
+        self.oldx = self.player.rect.x
+        self.oldy = self.player.rect.y
+
         self.checkStates()
         self.checkCollision()
+
         self.frame += 1
