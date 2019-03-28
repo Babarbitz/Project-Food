@@ -4,12 +4,12 @@
 #  @date   February 19, 2019
 
 import pygame
-import window.window as win
+import window
 import input
 import projectile
-import player.controller as pc
-import sprite.controller as sc
-import map.room as mr
+import player
+import sprite
+import map
 
 from .controller import *
 
@@ -19,22 +19,22 @@ def gameloop():
     isRunning = True
 
     # Create game window
-    window = win.Window()
+    windowController = window.Window()
 
     # Create input controller
     inputController = input.InputController()
 
     # Create a sprite group controller
-    spriteController = sc.SpriteGroupController()
+    spriteController = sprite.SpriteGroupController()
 
     # Create Player entity
-    playerController = pc.PlayerController(spriteController.collidableEntities)
+    playerController = player.PlayerController(spriteController.collidableEntities)
 
     # Create projectile controller
     projectileController = projectile.ProjectileController(spriteController.collidableEntities)
 
     # Create Room
-    room = mr.Room()
+    room = map.Room()
 
     room.render(spriteController)
 
@@ -57,4 +57,4 @@ def gameloop():
                             projectileController)
 
         # Update the sprites and render
-        window.update(spriteController.renderedEntities)
+        windowController.update(spriteController.renderedEntities)
