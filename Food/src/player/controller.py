@@ -7,10 +7,13 @@
 # Imports
 import pygame
 import input
+import projectile
+
 from .abstract import *
-import game.identifiers as gi
-import sprite.extractor as se
-import projectile.controller as pr
+
+import game
+import sprite
+
 
 
 # Constants
@@ -18,8 +21,6 @@ PR_SPRITE = 'Food/assets/knife.png'
 PR_SPEED = 8
 PR_STEP = (32,32)
 PR_SIZE = (128,32)
-
-PR_LEFT = ()
 
 PL_SPRITE = 'Food/assets/Chef.png'
 PL_STEP = (64,64)
@@ -40,8 +41,8 @@ class PlayerController(pygame.sprite.Sprite):
         super().__init__()
 
         # Get sprites
-        self.plSprites = se.extractSprites(PL_SPRITE,PL_SIZE,PL_STEP)
-        self.prSprites = se.extractSprites(PR_SPRITE,PR_SIZE,PR_STEP)
+        self.plSprites = sprite.extractSprites(PL_SPRITE,PL_SIZE,PL_STEP)
+        self.prSprites = sprite.extractSprites(PR_SPRITE,PR_SIZE,PR_STEP)
 
         # Player information
         self.player = Player(self.plSprites[0])
@@ -82,47 +83,52 @@ class PlayerController(pygame.sprite.Sprite):
 #                               Basic Attacks                                  #
 ################################################################################
 
-    def attackNorth(self, sc):
+    def attackNorth(self, sc, pc):
 
         self.attack(self.player.rect.x + OFFSET,
                     self.player.rect.y,
                     0,
                     -PR_SPEED,
                     self.prSprites[0],
-                    sc)
+                    sc,
+                    pc)
 
-    def attackSouth(self, sc):
+    def attackSouth(self, sc, pc):
 
         self.attack(self.player.rect.x + OFFSET,
                     self.player.rect.y + PL_STEP[0],
                     0,
                     PR_SPEED,
                     self.prSprites[1],
-                    sc)
+                    sc,
+                    pc)
 
-    def attackWest(self, sc):
+    def attackWest(self, sc, pc):
 
         self.attack(self.player.rect.x,
                     self.player.rect.y + OFFSET,
                     -PR_SPEED,
                     0,
                     self.prSprites[2],
-                    sc)
+                    sc,
+                    pc)
 
-    def attackEast(self, sc):
+    def attackEast(self, sc, pc):
 
         self.attack(self.player.rect.x + PL_STEP[0],
                     self.player.rect.y + OFFSET,
                     PR_SPEED,
                     0,
                     self.prSprites[3],
-                    sc)
+                    sc,
+                    pc)
 
-    def attack(self, x, y, xs, ys, sprite, sc):
+    def attack(self, x, y, xs, ys, sprite, sc, pc):
 
         if not self.player.attackCooldown:
-            temp = pr.Projectile(x, y, xs, ys, sprite, self.cList)
+            temp = projectile.Projectile(x, y, xs, ys, sprite, self.cList)
             sc.add(temp)
+            pc.addProjectile(temp)
             self.player.attackCooldown = True
             self.player.attackCooldownFrame = self.frame
 
@@ -135,7 +141,7 @@ class PlayerController(pygame.sprite.Sprite):
         collisions = pygame.sprite.spritecollide(self.player,self.cList,False)
 
         for i in collisions:
-            if (i.id == gi.Id.WALL):
+            if (i.id == game.ID.WALL):
                 self.collideWall(i)
 
     def collideWall(self,wall):
@@ -145,12 +151,15 @@ class PlayerController(pygame.sprite.Sprite):
         if(self.oldx + self.player.rect.width <= wall.rect.x):
             print('collide left')
             self.player.rect.x = wall.rect.x - self.player.rect.width
+
         elif(self.oldx >= wall.rect.x + wall.rect.width):
             print('collide right')
             self.player.rect.x = wall.rect.x + wall.rect.width
+
         elif(self.oldy + self.player.rect.height <= wall.rect.y):
             print('collide top')
             self.player.rect.y = wall.rect.y - self.player.rect.height
+
         elif(self.oldy >= wall.rect.y + wall.rect.height):
             print('collide bottom')
             self.player.rect.y = wall.rect.y + wall.rect.height
@@ -161,7 +170,7 @@ class PlayerController(pygame.sprite.Sprite):
             self.player.attackCooldown = False
 
 
-    def handleInputs(self, inputs, sc):
+    def handleInputs(self, inputs, sc, pc):
 
         for event in inputs:
 
@@ -178,24 +187,24 @@ class PlayerController(pygame.sprite.Sprite):
                 self.moveWest()
 
             elif event == input.Input.ATTACKNORTH:
-                self.attackNorth(sc)
+                self.attackNorth(sc, pc)
 
             elif event == input.Input.ATTACKSOUTH:
-                self.attackSouth(sc)
+                self.attackSouth(sc, pc)
 
             elif event == input.Input.ATTACKEAST:
-                self.attackEast(sc)
+                self.attackEast(sc, pc)
 
             elif event == input.Input.ATTACKWEST:
-                self.attackWest(sc)
+                self.attackWest(sc, pc)
 
 
-    def update(self, sc, inputs):
+    def update(self, inputs, sc, pc):
 
         self.oldx = self.player.rect.x
         self.oldy = self.player.rect.y
 
-        self.handleInputs(sc, inputs)
+        self.handleInputs(inputs, sc, pc)
 
         self.checkStates()
         self.checkCollision()

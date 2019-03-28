@@ -6,6 +6,7 @@
 import pygame
 import window.window as win
 import input
+import projectile
 import player.controller as pc
 import sprite.controller as sc
 import map.room as mr
@@ -29,6 +30,9 @@ def gameloop():
     # Create Player entity
     playerController = pc.PlayerController(spriteController.collidableEntities)
 
+    # Create projectile controller
+    projectileController = projectile.ProjectileController(spriteController.collidableEntities)
+
     # Create Room
     room = mr.Room()
 
@@ -47,8 +51,10 @@ def gameloop():
             isRunning = False
 
         # Update game state
-        gameStateController(inputController.inputs, spriteController,
-                playerController)
+        gameStateController(inputController.inputs,
+                            spriteController,
+                            playerController,
+                            projectileController)
 
         # Update the sprites and render
         window.update(spriteController.renderedEntities)

@@ -5,7 +5,7 @@
 
 
 import pygame
-import game.identifiers as gi
+import game
 
 
 PL_SPEED = 3
@@ -19,7 +19,7 @@ class Player(pygame.sprite.Sprite):
         super().__init__()
 
         # Give player Identifier
-        self.id = gi.Id.PLAYER
+        self.id = game.ID.PLAYER
 
         # Set flags for the spriteController
         self.renderable = True

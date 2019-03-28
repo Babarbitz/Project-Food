@@ -5,7 +5,7 @@
 
 from enum import Enum
 
-class Id(Enum):
+class ID(Enum):
     PLAYER      = 1
     ENEMY       = 2
     STRUCTURE   = 3

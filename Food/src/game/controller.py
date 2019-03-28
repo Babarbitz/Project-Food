@@ -4,12 +4,10 @@
 #  @date   March 03, 2019
 
 
-import input
-
-
-def gameStateController(inputs, sc, player):
+def gameStateController(inputs, sc, player, projectile):
 
     # Update Controllers
 
-    player.update(inputs, sc)
+    player.update(inputs, sc, projectile)
 
+    projectile.update()

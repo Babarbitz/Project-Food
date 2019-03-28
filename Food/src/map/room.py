@@ -4,8 +4,8 @@
 #  @date   March 17, 2019
 
 import pygame
-import game.identifiers as gi
-import sprite.extractor as se
+import game
+import sprite
 
 BG_SPRITE = 'Food/assets/base.png'
 BG_SIZE = (1280, 896)
@@ -51,7 +51,7 @@ class Background(pygame.sprite.Sprite):
 
         super().__init__()
 
-        self.bgSprites = se.extractSprites(BG_SPRITE, BG_SIZE, BG_STEP)
+        self.bgSprites = sprite.extractSprites(BG_SPRITE, BG_SIZE, BG_STEP)
         self.image = self.bgSprites[0]
         self.rect = self.image.get_rect()
 
@@ -73,7 +73,7 @@ class Structure(pygame.sprite.Sprite):
         self.rect.x = pos[0]
         self.rect.y = pos[1]
 
-        self.id = gi.Id.STRUCTURE
+        self.id = game.ID.STRUCTURE
 
         # Set flags for the spriteController
         self.renderable = True
@@ -92,7 +92,7 @@ class Wall(pygame.sprite.Sprite):
         self.rect.x = pos[0]
         self.rect.y = pos[1]
 
-        self.id = gi.Id.WALL
+        self.id = game.ID.WALL
 
         # Set flags for the spriteController
         self.renderable = False
@@ -105,14 +105,14 @@ class Door(pygame.sprite.Sprite):
 
         super().__init__()
 
-        self.Sprite = se.extractSprites(sprite, size, size)
+        self.Sprite = sprite.extractSprites(sprite, size, size)
         self.image = self.sSprites[0]
 
         self.rect = self.image.get_rect()
         self.rect.x = pos[0]
         self.rect.y = pos[1]
 
-        self.id = gi.Id.STRUCTURE
+        self.id = game.ID.STRUCTURE
 
         # Set flags for the spriteController
         self.renderable = True

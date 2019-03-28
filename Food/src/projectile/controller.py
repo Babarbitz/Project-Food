@@ -1,51 +1,50 @@
 ## @file   controller.py
-#  @title  Projectile
+#  @title  Projectile Controller
 #  @author Lucas Zacharewicz
 #  @date   March 08, 2019
 
+
 import pygame
-import game.identifiers as gi
+import game
 
-class Projectile(pygame.sprite.Sprite):
+from .abstract import *
 
-    def __init__(self, x, y, xspeed, yspeed, sprite, cList):
+class ProjectileController():
 
-        super().__init__()
 
-        self.image = sprite
-        self.rect = self.image.get_rect()
+    def __init__(self, cList):
 
-        # Set flags for the spriteController
-        self.renderable = True
-        self.updatable = True
-        self.collidable = True
-
-        # Set position
-        self.rect.x = x
-        self.rect.y = y
-
-        # Set speeds
-        self.xspeed = xspeed
-        self.yspeed = yspeed
-
-        self.id = gi.Id.PROJECTILE
+        self.projectiles = []
         self.cList = cList
 
-        # TODO
-        # Set game attributes like damage
+    def addProjectile(self, p):
 
-    def move(self):
-        self.rect.x += self.xspeed
-        self.rect.y += self.yspeed
+        self.projectiles.append(p)
+
+    def remove(self, p):
+
+        self.projectiles.remove(p)
+
+    def moveProjectiles(self):
+
+        for p in self.projectiles:
+            p.rect.x += p.xspeed
+            p.rect.y += p.yspeed
+
 
     def checkCollision(self):
 
-        collisions = pygame.sprite.spritecollide(self, self.cList, False)
+        for p in self.projectiles:
 
-        for c in collisions:
-            if (c.id == gi.Id.WALL):
-                self.kill()
+            collisions = pygame.sprite.spritecollide(p, self.cList, False)
+
+            for c in collisions:
+                if (c.id == game.ID.WALL):
+                    self.remove(p)
+                    p.kill()
+
 
     def update(self):
-        self.move()
+
+        self.moveProjectiles()
         self.checkCollision()
