@@ -8,7 +8,7 @@
 ###########
 
 import pygame
-import game.loop as gl
+import game
 
 
 ## @brief  Entering point of the game.
@@ -19,7 +19,7 @@ def main():
     pygame.init()
 
     # Run game
-    gl.gameloop()
+    game.gameloop()
 
     # IO output
     print("Exited game successfully")
