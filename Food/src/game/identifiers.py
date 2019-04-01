@@ -13,8 +13,8 @@ class ID(Enum):
     WALL        = 5
     PROJECTILE  = 6
 
-class Direction(Enum):
-    NORTH = 1
-    SOUTH = 2
-    EAST  = 3
-    WEST  = 4
+#class Direction(Enum):
+#    NORTH = 1
+#    SOUTH = 2
+#    EAST  = 3
+#    WEST  = 4
