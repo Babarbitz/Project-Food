@@ -18,29 +18,25 @@ def gameloop():
     # Game loop control variable, game exits on false
     isRunning = True
 
-    # Create game window
-    windowController = window.Window()
+    # Create controllers
 
-    # Create input controller
-    inputController = input.InputController()
+    inputController      = input.InputController()
+    spriteController     = sprite.SpriteGroupController()
+    windowController     = window.Window()
 
-    # Create a sprite group controller
-    spriteController = sprite.SpriteGroupController()
-
-    # Create Player entity
-    playerController = player.PlayerController(spriteController.collidableEntities)
-
-    # Create projectile controller
+    mapController        = map.MapController(spriteController)
+    playerController     = player.PlayerController(spriteController.collidableEntities)
     projectileController = projectile.ProjectileController(spriteController.collidableEntities)
 
-    # Create Room
-    room = map.Room()
 
-    room.render(spriteController)
+
+    # Do pregame setup
+
+    mapController.currentRoom.render(spriteController)
 
     playerController.addToController(spriteController)
-
     playerController.setPosition(400,400)
+
 
     while isRunning:
 
@@ -54,7 +50,8 @@ def gameloop():
         gameStateController(inputController.inputs,
                             spriteController,
                             playerController,
-                            projectileController)
+                            projectileController,
+                            mapController)
 
         # Update the sprites and render
         windowController.update(spriteController.renderedEntities)

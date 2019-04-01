@@ -9,8 +9,9 @@ class ID(Enum):
     PLAYER      = 1
     ENEMY       = 2
     STRUCTURE   = 3
-    WALL        = 4
-    PROJECTILE  = 5
+    DOOR        = 4
+    WALL        = 5
+    PROJECTILE  = 6
 
 class Direction(Enum):
     NORTH = 1
