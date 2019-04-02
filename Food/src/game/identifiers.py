@@ -12,6 +12,7 @@ class ID(Enum):
     DOOR        = 4
     WALL        = 5
     PROJECTILE  = 6
+    BACKGROUND  = 7
 
 #class Direction(Enum):
 #    NORTH = 1

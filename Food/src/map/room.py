@@ -29,12 +29,12 @@ class Room():
         self.walls.append(Wall([0,768],[1280,128]))
 
 
-        #structures
+        # structures
         self.structures = []
 
-        #enemies
+        # enemies
 
-        #doors
+        # doors
         self.doors = addDoors(doors)
 
 
@@ -52,19 +52,19 @@ class Room():
         for door in self.doors:
             sc.add(door)
 
-    def clearRoom(self):
+    def clearRoom(self, sc):
 
-        self.background.kill()
+        sc.remove(self.background)
 
         for wall in self.walls:
-            wall.kill()
+            sc.remove(wall)
 
         for structure in self.structures:
-            structure.kill()
+            sc.remove(structure)
 
+        for door in self.doors:
+            sc.remove(door)
 
-    def checkDoorCollisions(self):
-       pass
 
 
 def addDoors(doors):

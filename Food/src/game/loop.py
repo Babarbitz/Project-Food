@@ -26,7 +26,7 @@ def gameloop():
 
     mapController        = map.MapController(spriteController)
     playerController     = player.PlayerController(spriteController.collidableEntities)
-    projectileController = projectile.ProjectileController(spriteController.collidableEntities)
+    projectileController = projectile.ProjectileController(spriteController)
 
 
 

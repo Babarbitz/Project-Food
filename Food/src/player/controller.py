@@ -13,7 +13,7 @@ from .abstract import *
 
 import game
 import sprite
-
+import map
 
 
 # Constants
@@ -22,18 +22,22 @@ PR_SPEED = 8
 PR_STEP = (32,32)
 PR_SIZE = (128,32)
 
+
 PL_SPRITE = 'Food/assets/Chef.png'
 PL_STEP = (64,64)
 PL_SIZE = (64,64)
 
+
 # Centers the sprite in the view
 OFFSET = (PL_STEP[0]/2) - (PR_STEP[0]/2)
+
 
 class PlayerController(pygame.sprite.Sprite):
 
 ################################################################################
 #                                 Initializer                                  #
 ################################################################################
+
 
     def __init__(self, cList):
 
@@ -56,32 +60,41 @@ class PlayerController(pygame.sprite.Sprite):
         # Create Frame Counter
         self.frame = 0
 
+
     def addToController(self, sc):
         sc.add(self.player)
+
 
     def setPosition(self, x, y):
         self.player.rect.x = x
         self.player.rect.y = y
 
+
 ################################################################################
 #                                  Movement                                    #
 ################################################################################
 
+
     def moveWest(self):
         self.player.rect.x -= PL_SPEED
+
 
     def moveEast(self):
         self.player.rect.x += PL_SPEED
 
+
     def moveNorth(self):
         self.player.rect.y -= PL_SPEED
+
 
     def moveSouth(self):
         self.player.rect.y += PL_SPEED
 
+
 ################################################################################
 #                               Basic Attacks                                  #
 ################################################################################
+
 
     def attackNorth(self, sc, pc):
 
@@ -93,6 +106,7 @@ class PlayerController(pygame.sprite.Sprite):
                     sc,
                     pc)
 
+
     def attackSouth(self, sc, pc):
 
         self.attack(self.player.rect.x + OFFSET,
@@ -102,6 +116,7 @@ class PlayerController(pygame.sprite.Sprite):
                     self.prSprites[1],
                     sc,
                     pc)
+
 
     def attackWest(self, sc, pc):
 
@@ -113,6 +128,7 @@ class PlayerController(pygame.sprite.Sprite):
                     sc,
                     pc)
 
+
     def attackEast(self, sc, pc):
 
         self.attack(self.player.rect.x + PL_STEP[0],
@@ -122,6 +138,7 @@ class PlayerController(pygame.sprite.Sprite):
                     self.prSprites[3],
                     sc,
                     pc)
+
 
     def attack(self, x, y, xs, ys, sprite, sc, pc):
 
@@ -136,34 +153,57 @@ class PlayerController(pygame.sprite.Sprite):
 #                           Collision Rules                                   #
 ###############################################################################
 
+
     def checkCollision(self):
 
         collisions = pygame.sprite.spritecollide(self.player,self.cList,False)
 
         for i in collisions:
+
             if (i.id == game.ID.WALL):
                 self.collideWall(i)
 
+
     def collideWall(self,wall):
 
-        print("hit")
-
         if(self.oldx + self.player.rect.width <= wall.rect.x):
-            print('collide left')
             self.player.rect.x = wall.rect.x - self.player.rect.width
 
         elif(self.oldx >= wall.rect.x + wall.rect.width):
-            print('collide right')
             self.player.rect.x = wall.rect.x + wall.rect.width
 
         elif(self.oldy + self.player.rect.height <= wall.rect.y):
-            print('collide top')
             self.player.rect.y = wall.rect.y - self.player.rect.height
 
         elif(self.oldy >= wall.rect.y + wall.rect.height):
-            print('collide bottom')
             self.player.rect.y = wall.rect.y + wall.rect.height
 
+
+    def collideDoor(self, door):
+
+        if door.type == map.ID.NORTH:
+            self.setPosition(  map.BG_SIZE[0]/2
+                             - PL_SIZE[0]/2 ,
+                               map.BG_SIZE[1]
+                             - 150
+                             - PL_SIZE[1])
+
+        elif door.type == map.ID.SOUTH:
+            self.setPosition(  map.BG_SIZE[0]/2
+                             - PL_SIZE[0]/2 ,
+                               150)
+
+        elif door.type == map.ID.EAST:
+            self.setPosition(  150,
+                               map.BG_SIZE[1]/2
+                             - PL_SIZE[1]/2)
+
+        elif door.type == map.ID.WEST:
+             self.setPosition( map.BG_SIZE[0]
+                             - 150
+                             - PL_SIZE[0],
+                               map.BG_SIZE[1]/2
+                             - PL_SIZE[1]/2)
     def checkStates(self):
 
         if self.frame - self.player.attackCooldownFrame > 20: #<- attack cool down

@@ -4,27 +4,62 @@
 #  @date   March 12, 2019
 
 import pygame
+import game
 
 class SpriteGroupController():
 
     def __init__(self):
 
         self.renderedEntities = pygame.sprite.Group()
-        self.updatedEntities = pygame.sprite.Group()
         self.collidableEntities = pygame.sprite.Group()
+
+        self.baselayer = []
+        self.projectilelayer = []
+        self.playerlayer = []
 
     def add(self,entity):
 
         if entity.renderable:
-           self.renderedEntities.add(entity)
-        if entity.updatable:
-           self.updatedEntities.add(entity)
+
+            if entity.id == game.ID.PLAYER:
+                self.playerlayer.append(entity)
+
+            elif entity.id == game.ID.PROJECTILE:
+                self.projectilelayer.append(entity)
+
+            else:
+                self.baselayer.append(entity)
+
+            self.updateRender()
+
         if entity.collidable:
-           self.collidableEntities.add(entity)
+            self.collidableEntities.add(entity)
 
-    # Runs updates for all sprite group
-    def update(self):
 
-        self.updatedEntities.update()
+
+    def remove(self, entity):
+
+        if entity in self.baselayer:
+            self.baselayer.remove(entity)
+
+        elif entity in self.projectilelayer:
+            self.projectilelayer.remove(entity)
+
+        elif entity in self.playerlayer:
+            self.playerlayer.remove(entity)
+
+        self.collidableEntities.remove(entity)
+
+        self.updateRender()
+
+    def updateRender(self):
+
+        self.renderedEntities.empty()
+
+        self.renderedEntities.add(self.baselayer)
+
+        self.renderedEntities.add(self.projectilelayer)
+
+        self.renderedEntities.add(self.playerlayer)
 
 

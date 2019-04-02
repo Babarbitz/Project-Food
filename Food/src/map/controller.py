@@ -12,8 +12,7 @@ class MapController():
         self.currentRoom = self.map[6]
         self.sc = sc
 
-    def checkRoomTransition(self):
-
+    def checkRoomTransition(self, pc):
 
         for door in self.currentRoom.doors:
             collisions = pygame.sprite.spritecollide(door,
@@ -22,14 +21,34 @@ class MapController():
 
             for i in collisions:
                 if (i.id == game.ID.PLAYER):
-                    print("colide door")
+                    pc.collideDoor(door)
                     self.transition(door.type)
 
 
     def transition(self, direction):
 
+        position = self.currentRoom.position
+        self.currentRoom.clearRoom(self.sc)
+
+        i = position[0]
+        j = position[1]
+
         if direction == ID.NORTH:
-            pass
+            self.currentRoom = self.map[i + 5 * (j - 1)]
+
+        if direction == ID.SOUTH:
+            self.currentRoom = self.map[i + 5 * (j + 1)]
+
+        if direction == ID.EAST:
+            self.currentRoom = self.map[(i + 1) + 5 * j]
+
+        if direction == ID.WEST:
+            self.currentRoom = self.map[(i - 1) + 5 * j]
+
+
+
+        self.currentRoom.render(self.sc)
+        print(self.currentRoom.position)
 
     def generateLevel(self):
 
@@ -119,5 +138,5 @@ class MapController():
 
         return layout
 
-    def update(self):
-        self.checkRoomTransition()
+    def update(self, pc):
+        self.checkRoomTransition(pc)

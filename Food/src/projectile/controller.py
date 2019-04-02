@@ -12,10 +12,11 @@ from .abstract import *
 class ProjectileController():
 
 
-    def __init__(self, cList):
+    def __init__(self, sc):
 
         self.projectiles = []
-        self.cList = cList
+        self.sc = sc
+        self.cList = sc.collidableEntities
 
     def addProjectile(self, p):
 
@@ -41,7 +42,7 @@ class ProjectileController():
             for c in collisions:
                 if (c.id == game.ID.WALL):
                     self.remove(p)
-                    p.kill()
+                    self.sc.remove(p)
 
 
     def update(self):
