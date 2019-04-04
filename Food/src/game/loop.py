@@ -21,6 +21,7 @@ def gameloop():
     # Create controllers
 
     inputController      = input.InputController()
+    menuController       = menu.MainMenuController()
     spriteController     = sprite.SpriteGroupController()
     windowController     = window.Window()
 
@@ -29,8 +30,8 @@ def gameloop():
     projectileController = projectile.ProjectileController(spriteController)
 
 
-
     # Do pregame setup
+    gameMode = game.Mode.MAINMENU
 
     mapController.currentRoom.render(spriteController)
 
@@ -46,12 +47,14 @@ def gameloop():
         if inputController.exitSignal:
             isRunning = False
 
+
         # Update game state
         gameStateController(inputController.inputs,
                             spriteController,
                             playerController,
                             projectileController,
-                            mapController)
+                            mapController, gameMode)
+
 
         # Update the sprites and render
         windowController.update(spriteController.renderedEntities)

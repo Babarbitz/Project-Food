@@ -14,6 +14,8 @@ class Text(pygame.sprite.Sprite):
         super().__init__()
         pygame.font.init()
 
+        self.id = game.ID.TEXT
+
         self.color = color
 
         self.string = string

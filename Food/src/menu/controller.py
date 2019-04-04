@@ -17,10 +17,20 @@ class MainMenuController():
         self.background = map.Background(BG[0])
 
         self.text = []
-
         self.text.append(game.Text((100,100), 'test', 18, (0,0,0)))
+
+
 
     def render(self, sc):
 
-        sc.add()
+        sc.add(self.background)
 
+        for message in self.text:
+            sc.add(message)
+
+    def clear(self, sc):
+
+        sc.remove(self.background)
+
+        for message in self.text:
+            sc.remove(message)

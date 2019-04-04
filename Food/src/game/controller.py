@@ -3,14 +3,17 @@
 #  @author Lucas Zacharewicz
 #  @date   March 03, 2019
 
+import game
 
-def gameStateController(inputs, sc, player, projectile, map):
+def gameStateController(inputs, sc, player, projectile, map, mode):
 
     # Update Controllers
+    if mode == game.Mode.MAINMENU:
 
+    elif mode == game.Mode.GAME:
 
-    player.update(inputs, sc, projectile)
+        player.update(inputs, sc, projectile)
 
-    projectile.update()
+        projectile.update()
 
-    map.update(player)
+        map.update(player)
