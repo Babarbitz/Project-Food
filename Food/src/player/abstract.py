@@ -35,7 +35,7 @@ class Player(pygame.sprite.Sprite):
         self.attackCooldownFrame = 0
 
         # Player stats
-        self.hp = PL_SPEED
+        self.hp = PL_MAXHP
         self.maxHP = PL_MAXHP
 
 
