@@ -10,6 +10,7 @@ DOOR_SPRITE = 'Food/assets/door.png'
 DOOR_SIZE = (512,128)
 DOOR_STEP = (128,128)
 
+
 class Room():
 
     def __init__(self, pos, doors):
@@ -17,8 +18,10 @@ class Room():
         # Position in map
         self.position = pos
 
+        BG = sprite.extractSprites(BG_SPRITE, BG_SIZE, BG_STEP)
+
         # Room background Image
-        self.background = Background()
+        self.background = Background(BG[0])
 
         # TODO: Refactor to make not hardcoded
         # Room Wall collison
