@@ -82,6 +82,9 @@ class EnemyController(pygame.sprite.Sprite):
 			if (i.id == game.ID.WALL):
 				self.collideWall(i)
 
+			elif (i.id == game.ID.PLAYER):
+				self.collidePlayer(i)
+
 
 	def collideWall(self, wall):
 
@@ -96,6 +99,26 @@ class EnemyController(pygame.sprite.Sprite):
 
         elif(self.oldy >= wall.rect.y + wall.rect.height):
             self.enemy.rect.y = wall.rect.y + wall.rect.height
+
+
+    #similar to collideWall. Need to check if works. 
+    def collidePlayer(self, player):
+
+    	playerX = player.pos()[0]
+    	playerY = player.pos()[1]
+
+    	if (self.oldx + self.enemy.rect.width <= playerX):
+    		self.enemy.rect.x = playerX - self.enemy.rect.width
+
+    	elif(self.oldx >= playerX + player.rect.width):
+    		self.enemy.rect.x = playerX + player.rect.width  #should use getter for player width
+
+
+    	if(self.oldy + self.enemy.rect.height <= playerY):
+    		self.enemy.rect.y = playerY - self.enemy.rect.height
+
+    	elif(self.oldy >= playerY + player.rect.height):
+    		self.enemy.rect.y = playerY + player.rect.height
 
 
     def checkStates(self):
