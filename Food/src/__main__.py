@@ -19,8 +19,9 @@ def main():
     pygame.init()
 
     # Run game
-    game.gameloop()
+    gameController = game.GameController()
 
+    gameController.start()
     # IO output
     print("Exited game successfully")
 
