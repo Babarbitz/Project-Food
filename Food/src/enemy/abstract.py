@@ -9,7 +9,7 @@ import game
 
 class Enemy(pygame.sprite.Sprite):
 
-    def __init__(self, image, health):
+    def __init__(self, image, health, speed):
 
         super().__init__()
 
@@ -31,6 +31,7 @@ class Enemy(pygame.sprite.Sprite):
 
         
         self.hp = health
+        self.speed = speed
 
 
     @property
