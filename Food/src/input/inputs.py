@@ -15,6 +15,8 @@ KEYATTACKNORTH = p.K_i
 KEYATTACKSOUTH = p.K_k
 KEYATTACKWEST  = p.K_j
 KEYATTACKEAST  = p.K_l
+KEYINVENTORY   = p.K_u
+KEYESCAPE      = p.K_ESCAPE
 KEYENTER       = p.K_RETURN
 
 
@@ -32,3 +34,5 @@ class Input(Enum):
     MENUUP      = 9
     MENUDOWN    = 10
     MENUSELECT  = 11
+    INVENTORY   = 12
+    ESCAPE      = 13

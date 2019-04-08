@@ -14,6 +14,7 @@ class ID(Enum):
     PROJECTILE  = 6
     BACKGROUND  = 7
     TEXT        = 8
+    MENU        = 9
 
 class Mode(Enum):
     MAINMENU  = 1

@@ -32,14 +32,14 @@ class GameController():
         self.mainMenu             = menu.MenuController(self.spriteController,
                                                         ['New Game', 'Load Game'])
         self.pauseMenu            = menu.MenuController(self.spriteController,
-                                                        ['Resume',
-                                                         'Save and Quit'])
+                                                        ['Resume', 'Save and Quit'])
         self.playerController     = player.PlayerController(self.spriteController.collidableEntities)
         self.projectileController = projectile.ProjectileController(self.spriteController)
 
     def start(self):
 
-        self.startMenu()
+        #self.startMenu()
+        #self.PauseMenu()
         self.setup()
         self.game()
 
@@ -76,11 +76,13 @@ class GameController():
             if self.inputController.exitSignal:
                 self.gameLoop = False
 
-            for event in self.inputController.inputs:
-                if event ==
 
             # Update game state
             self.gameStateUpdate(self.inputController.inputs)
+
+            for event in self.inputController.inputs:
+                if event == input.Input.ESCAPE:
+                    self.PauseMenu()
 
             # Update the sprites and render
             self.windowController.update(self.spriteController.renderedEntities)
@@ -99,16 +101,29 @@ class GameController():
                 self.pauseMenuLoop = False
 
             for event in self.inputController.inputs:
+
                 if event == input.Input.MENUUP:
                     self.pauseMenu.selection = 0
+
                 elif event == input.Input.MENUDOWN:
                     self.pauseMenu.selection = 1
+
                 elif event == input.Input.MENUSELECT:
-                    print("enter")
-                    if self.menuController.selection == 0:
-                        print("Resume")
+
+                    self.pauseMenu.clear()
+                    self.pauseMenuLoop = False
+
+                    if self.pauseMenu.selection == 0:
+                        pass
                     else:
-                        print("Quit")
+                        self.gameLoop = False
+
+            # Update game state
+            self.pauseMenu.updateText()
+
+            # Update the sprites and render
+            self.windowController.update(self.spriteController.renderedEntities)
+        self.pauseMenu.clear()
 
     def startMenu(self):
 
@@ -128,7 +143,7 @@ class GameController():
                 elif event == input.Input.MENUDOWN:
                     self.mainMenu.selection = 1
                 elif event == input.Input.MENUSELECT:
-                    print("enter")
+                    self.mainMenu.clear()
                     if self.mainMenu.selection == 0:
                         print("new game")
                     else:

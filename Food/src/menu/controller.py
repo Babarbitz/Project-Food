@@ -1,7 +1,8 @@
 import pygame
 import game
-import map
 import sprite
+
+from .background import *
 
 MU_SPRITE = 'Food/assets/menu.png'
 MU_SIZE = (1280,960)
@@ -19,7 +20,7 @@ class MenuController():
 
         self.sc = sc
 
-        self.background = map.Background(BG[0])
+        self.background = Background(BG[0])
 
         self.text = []
 
@@ -36,13 +37,14 @@ class MenuController():
 
         for text in self.text:
             self.sc.add(text)
+        print("rendered")
 
     def clear(self):
 
-        self.sc.add(self.background)
+        self.sc.remove(self.background)
 
         for text in self.text:
-            self.sc.add(text)
+            self.sc.remove(text)
 
     def updateText(self):
 

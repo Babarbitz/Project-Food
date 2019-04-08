@@ -59,6 +59,12 @@ class InputController:
             elif e.key == KEYATTACKEAST:
                 self.addInput(Input.ATTACKEAST)
 
+            elif e.key == KEYINVENTORY:
+                self.addInput(Input.INVENTORY)
+
+            elif e.key == KEYESCAPE:
+                self.addInput(Input.ESCAPE)
+
         elif mode == 'm':
 
             if e.key == KEYMOVENORTH:
@@ -69,6 +75,9 @@ class InputController:
 
             elif e.key == KEYENTER:
                 self.addInput(Input.MENUSELECT)
+
+            elif e.key == KEYESCAPE:
+                self.addInput(Input.INVENTORY)
 
 
     # Removes inputs from the input list
@@ -100,6 +109,13 @@ class InputController:
             elif e.key == KEYATTACKEAST:
                 self.removeInput(Input.ATTACKEAST)
 
+            elif e.key == KEYINVENTORY:
+                self.removeInput(Input.INVENTORY)
+
+            elif e.key == KEYESCAPE:
+                self.removeInput(Input.ESCAPE)
+
+
         elif mode == 'm':
 
             if e.key == KEYMOVENORTH:
@@ -110,6 +126,9 @@ class InputController:
 
             elif e.key == KEYENTER:
                 self.removeInput(Input.MENUSELECT)
+
+            elif e.key == KEYESCAPE:
+                self.removeInput(Input.INVENTORY)
 
     # Adds input (i) to the tape iff it is not in the tape
     def addInput(self, i):

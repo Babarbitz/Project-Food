@@ -13,10 +13,10 @@ class Background(pygame.sprite.Sprite):
 
         super().__init__()
 
+        self.id = None
+
         self.image = image
         self.rect = self.image.get_rect()
-
-        self.id = game.ID.BACKGROUND
 
         # Set flags for the spriteController
         self.renderable = True
