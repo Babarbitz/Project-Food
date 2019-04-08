@@ -14,6 +14,7 @@ class SpriteGroupController():
         self.collidableEntities = pygame.sprite.Group()
 
         self.baselayer = []
+        self.textlayer = []
         self.projectilelayer = []
         self.playerlayer = []
         self.textlayer = []
@@ -38,7 +39,6 @@ class SpriteGroupController():
 
         if entity.collidable:
             self.collidableEntities.add(entity)
-
 
 
     def remove(self, entity):

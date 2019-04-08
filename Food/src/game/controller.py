@@ -132,4 +132,3 @@ class GameController():
 
             # Update the sprites and render
             self.windowController.update(self.spriteController.renderedEntities)
-
