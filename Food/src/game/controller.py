@@ -3,19 +3,23 @@
 #  @author Lucas Zacharewicz
 #  @date   March 03, 2019
 
-import window
 import input
+import map
+import menu
 import projectile
 import player
 import sprite
-import map
+import window
 
 class GameController():
 
     def __init__(self):
 
-        # Game loop control variable
-        self.isRunning = True
+        # Game loop control variables
+        self.gameLoop = True
+        self.mainMenuLoop = True
+        self.menuLoop = True
+
 
         # Low level engine modules
         self.inputController      = input.InputController()
@@ -24,13 +28,16 @@ class GameController():
 
         # game modules
         self.mapController        = map.MapController(self.spriteController)
+        self.mainMenu             = menu.MenuController(self.spriteController,
+                                                        ['New Game', 'Load Game'])
         self.playerController     = player.PlayerController(self.spriteController.collidableEntities)
         self.projectileController = projectile.ProjectileController(self.spriteController)
 
     def start(self):
 
+        self.startMenu()
         self.setup()
-        self.gameLoop()
+        self.game()
 
     def setup(self):
 
@@ -54,16 +61,16 @@ class GameController():
         self.mapController.update(self.playerController)
 
 
-    def gameLoop(self):
+    def game(self):
 
 
-        while self.isRunning:
+        while self.gameLoop:
 
             # Event handling
-            self.inputController.gatherInputs()
+            self.inputController.gatherInputs('g')
 
             if self.inputController.exitSignal:
-                self.isRunning = False
+                self.gameLoop = False
 
             # Update game state
             self.gameStateUpdate(self.inputController.inputs)
@@ -71,4 +78,58 @@ class GameController():
             # Update the sprites and render
             self.windowController.update(self.spriteController.renderedEntities)
 
+
+    def PauseMenu(self):
+
+        self.menuController.render()
+
+        while self.mainMenuLoop:
+
+            # Event handling
+            self.inputController.gatherInputs('m')
+
+            if self.inputController.exitSignal:
+                self.mainMenuLoop = False
+
+            for event in self.inputController.inputs:
+                if event == input.Input.MENUUP:
+                    self.menuController.selection = 0
+                elif event == input.Input.MENUDOWN:
+                    self.menuController.selection = 1
+                elif event == input.Input.MENUSELECT:
+                    print("enter")
+                    if self.menuController.selection == 0:
+                        print("new game")
+                    else:
+                        print("load game")
+
+    def startMenu(self):
+
+        self.mainMenu.render()
+
+        while self.mainMenuLoop:
+
+            # Event handling
+            self.inputController.gatherInputs('m')
+
+            if self.inputController.exitSignal:
+                self.mainMenuLoop = False
+
+            for event in self.inputController.inputs:
+                if event == input.Input.MENUUP:
+                    self.mainMenu.selection = 0
+                elif event == input.Input.MENUDOWN:
+                    self.mainMenu.selection = 1
+                elif event == input.Input.MENUSELECT:
+                    print("enter")
+                    if self.mainMenu.selection == 0:
+                        print("new game")
+                    else:
+                        print("load game")
+
+            # Update game state
+            self.mainMenu.updateText()
+
+            # Update the sprites and render
+            self.windowController.update(self.spriteController.renderedEntities)
 

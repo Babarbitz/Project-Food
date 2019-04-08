@@ -13,6 +13,7 @@ class ID(Enum):
     WALL        = 5
     PROJECTILE  = 6
     BACKGROUND  = 7
+    TEXT        = 8
 
 #class Direction(Enum):
 #    NORTH = 1
