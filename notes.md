@@ -16,12 +16,16 @@ Maps need:
 
 To spawn in x of each enemy in the room:
 
-* Enemies need to work
 * way to make enemies of each type
-* way to place them in the room
+  * Constructor for each
+  * random spawn position (not in walls/structures/doors)
+  * way of passing level sprites to enemies
 * way to place them in the sprite list
+* Enemies need to drop items on death
 
-# Menu Screen
+# Player
 
-* Add new background
-* remove 2nd menu option
+* Needs to die
+* should be invunrable when hit
+
+

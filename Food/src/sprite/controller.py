@@ -62,7 +62,7 @@ class SpriteGroupController():
         elif entity in self.menulayer:
             self.menulayer.remove(entity)
 
-        elif entity.id == game.ID.ENEMY:
+        elif entity in self.enemylayer:
             self.enemylayer.remove(entity)
 
         self.collidableEntities.remove(entity)

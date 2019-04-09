@@ -59,7 +59,7 @@ class PlayerController(pygame.sprite.Sprite):
 
         # Create Frame Counter
         self.frame = 0
-
+        self.invincbleFrame = 0
 
     def addToController(self, sc):
         sc.add(self.player)
@@ -143,7 +143,8 @@ class PlayerController(pygame.sprite.Sprite):
     def attack(self, x, y, xs, ys, sprite, sc, pc):
 
         if not self.player.attackCooldown:
-            temp = projectile.Projectile(x, y, xs, ys, sprite, self.cList)
+            temp = projectile.Projectile(x, y, xs, ys, sprite, self.cList,
+                    self.player.attack)
             sc.add(temp)
             pc.addProjectile(temp)
             self.player.attackCooldown = True
@@ -160,8 +161,11 @@ class PlayerController(pygame.sprite.Sprite):
 
         for i in collisions:
 
-            if (i.id == game.ID.WALL):
+            if (i.id == game.ID.WALL or i.id == game.ID.STRUCTURE):
                 self.collideWall(i)
+
+            elif (i.id == game.ID.ENEMY):
+                self.player.hp -= i.damage
 
 
     def collideWall(self,wall):
@@ -238,6 +242,14 @@ class PlayerController(pygame.sprite.Sprite):
             elif event == input.Input.ATTACKWEST:
                 self.attackWest(sc, pc)
 
+    def upgradeAttack(self):
+        self.player.attack += 1
+
+    def upgradeHP(self):
+        self.player.maxHp+= 1
+
+    def upgradeSpeed(self):
+        self.player.speed += 1
 
     def update(self, inputs, sc, pc):
 
@@ -248,5 +260,8 @@ class PlayerController(pygame.sprite.Sprite):
 
         self.checkStates()
         self.checkCollision()
+
+        if self.player.hp <= 0:
+            self.player.kill()
 
         self.frame += 1

@@ -11,9 +11,15 @@ import projectile
 import game
 import sprite
 import map
+from random import randint
 
 from .abstract import *
+# image, hp, speed, damage
+#ENEMYDATA = [image, 3, 3, 0]
 
+IT_SPRITE = 'Food/assets/test.png'
+IT_SIZE = (32,32)
+IT_STEP = (32,32)
 
 class EnemyController():
 
@@ -22,12 +28,26 @@ class EnemyController():
 
         self.enemies = []
 
+        self.sprites = sprite.extractSprites(IT_SPRITE, IT_SIZE, IT_STEP)
+
+        self.data = [[self.sprites[0], 3, 3, 1]]
+
         #set collision list
         self.cList = cList
 
 
-    def addToController(self, sc):
-        sc.add(self.enemy)
+    def spawnEnemies(self, sc):
+
+       # for i in range(randint(0, 5)):
+        self.enemies.append(Enemy(self.data[0], (200, 200)))
+        self.enemies.append(Enemy(self.data[0], (600, 200)))
+        self.enemies.append(Enemy(self.data[0], (400, 800)))
+        self.renderEnemies(sc)
+
+
+    def renderEnemies(self,sc):
+        for enemy in self.enemies:
+            sc.add(enemy)
 
     def setEnemyPosition(self, Enemy, x, y):
         enemy.rect.x = x
@@ -39,12 +59,12 @@ class EnemyController():
 ################################################################################
 
 
-    def moveX(self, speedX):
-        self.enemy.rect.x += speedX
+    def moveX(self, enemy, speedX):
+        enemy.rect.x += speedX
 
 
-    def moveY(self, speedY):
-        self.enemy.rect.y += speedY
+    def moveY(self, enemy, speedY):
+        enemy.rect.y += speedY
 
 
 
@@ -52,90 +72,67 @@ class EnemyController():
 #                           Collision Rules                                   #
 ###############################################################################
 
-    def checkCollision(self):
+    def checkCollision(self, enemy):
 
-        collisions = pygame.sprite.spritecollide(self.enemy, self.cList, False)
+        collisions = pygame.sprite.spritecollide(enemy, self.cList, False)
 
-            for i in collisions:
+        for i in collisions:
 
-                if (i.id == game.ID.WALL):
-                    self.collideWall(i)
-
-                elif (i.id == game.ID.PLAYER):
-                    self.collidePlayer(i)
+            if (i.id == game.ID.WALL or i.id == game.ID.STRUCTURE):
+                self.collideWall(enemy,i)
 
 
-    def collideWall(self, wall):
+    def collideWall(self, enemy, wall):
 
-        if (self.oldx + self.enemy.rect.width <= wall.rect.x):
-            self.enemy.rect.x = wall.rect.x - self.enemy.rect.width
+        if (enemy.oldx + enemy.rect.width <= wall.rect.x):
+            enemy.rect.x = wall.rect.x - enemy.rect.width
 
-        elif(self.oldx >= wall.rect.x + wall.rect.width):
-            self.enemy.rect.x = wall.rect.x + wall.rect.width
+        elif (enemy.oldx >= wall.rect.x + wall.rect.width):
+            enemy.rect.x = wall.rect.x + wall.rect.width
 
-        elif(self.oldy + self.enemy.rect.height <= wall.rect.y):
-            self.enemy.rect.y = wall.rect.y - self.enemy.rect.height
+        elif (enemy.oldy + enemy.rect.height <= wall.rect.y):
+            enemy.rect.y = wall.rect.y - enemy.rect.height
 
-        elif(self.oldy >= wall.rect.y + wall.rect.height):
-            self.enemy.rect.y = wall.rect.y + wall.rect.height
-
-
-    #similar to collideWall. Need to check if works.
-    def collidePlayer(self, player):
-
-        playerX = player.pos()[0]
-        playerY = player.pos()[1]
-
-        if (self.oldx + self.enemy.rect.width <= playerX):
-            self.enemy.rect.x = playerX - self.enemy.rect.width
-
-        elif(self.oldx >= playerX + player.rect.width):
-            self.enemy.rect.x = playerX + player.rect.width  #should use getter for player width
+        elif (enemy.oldy >= wall.rect.y + wall.rect.height):
+            enemy.rect.y = wall.rect.y + wall.rect.height
 
 
-        if(self.oldy + self.enemy.rect.height <= playerY):
-            self.enemy.rect.y = playerY - self.enemy.rect.height
+    def moveToPlayer(self, player, enemy):
 
-        elif(self.oldy >= playerY + player.rect.height):
-            self.enemy.rect.y = playerY + player.rect.height
-
-
-    def checkStates(self):
-
-        if self.frame - self.enemy.attackCooldownFrame > 20: #<- attack cool down
-            self.enemy.attackCooldown = False
-
-
-    def moveToPlayer(self, player):
-
-        xDiff = player.pos[0] - self.enemy.rect.x
-        yDiff = player.pos[1] - self.enemy.rect.y
-        enSpeed = self.enemy.speed
+        xDiff = player.pos[0] - enemy.rect.x
+        yDiff = player.pos[1] - enemy.rect.y
+        enSpeed = enemy.speed
 
         if (xDiff > enSpeed):
-            moveX(enSpeed)
+            self.moveX(enemy,enSpeed)
 
         elif (xDiff < -enSpeed):
-            moveX(-enSpeed)
+            self.moveX(enemy,-enSpeed)
+
         elif (abs(xDiff) <= enSpeed):
-            moveX(xDiff)
+            self.moveX(enemy,xDiff)
 
         if (yDiff > enSpeed):
-            moveY(enSpeed)
+            self.moveY(enemy,enSpeed)
+
         elif (yDiff < -enSpeed):
-            moveY(-enSpeed)
+            self.moveY(enemy,-enSpeed)
+
         elif (abs(yDiff) <= enSpeed):
-            moveY(yDiff)
+            self.moveY(enemy,yDiff)
 
+    def update(self, player):
 
-    def update(self, inputs, sc, pc):
+        for enemy in self.enemies:
 
-        self.oldx = self.enemy.rect.x
-        self.oldy = self.enemy.rect.y
+            enemy.oldx = enemy.rect.x
+            enemy.oldy = enemy.rect.y
 
-        self.moveToPlayer(player)
+            self.moveToPlayer(player, enemy)
 
-        self.checkStates()
-        self.checkCollision()
+            self.checkCollision(enemy)
 
-        self.frame += 1
+            if enemy.hp <= 0:
+                enemy.kill()
+
+            enemy.frame += 1

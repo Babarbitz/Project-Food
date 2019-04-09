@@ -81,7 +81,7 @@ class MapController():
                 else:
                     doors.append(False)
             except IndexError:
-                pass
+                doors.append(False)
 
             # Check South room
             try:
@@ -90,7 +90,7 @@ class MapController():
                 else:
                     doors.append(False)
             except IndexError:
-                pass
+                doors.append(False)
 
             # Check East room
             try:
@@ -99,7 +99,7 @@ class MapController():
                 else:
                     doors.append(False)
             except IndexError:
-                pass
+                doors.append(False)
 
             # Check West room
             try:
@@ -108,7 +108,7 @@ class MapController():
                 else:
                     doors.append(False)
             except IndexError:
-                pass
+                doors.append(False)
 
 
             # Place Room
