@@ -27,7 +27,7 @@ class InputController:
                 self.keyPress(event,mode)
 
             elif event.type == pygame.KEYUP:
-                self.keyRelease(event,mode)
+                self.keyRelease(event)
 
 
     # Adds inputs to the input list
@@ -76,59 +76,44 @@ class InputController:
             elif e.key == KEYENTER:
                 self.addInput(Input.MENUSELECT)
 
-            elif e.key == KEYESCAPE:
-                self.addInput(Input.INVENTORY)
-
 
     # Removes inputs from the input list
-    def keyRelease(self, e, mode):
+    def keyRelease(self, e):
 
-        if mode == 'g':
+        if e.key == KEYMOVENORTH:
+            self.removeInput(Input.MOVENORTH)
+            self.removeInput(Input.MENUUP)
 
-            if e.key == KEYMOVENORTH:
-                self.removeInput(Input.MOVENORTH)
+        elif e.key == KEYMOVESOUTH:
+            self.removeInput(Input.MOVESOUTH)
+            self.removeInput(Input.MENUDOWN)
 
-            elif e.key == KEYMOVESOUTH:
-                self.removeInput(Input.MOVESOUTH)
+        elif e.key == KEYMOVEWEST:
+            self.removeInput(Input.MOVEWEST)
 
-            elif e.key == KEYMOVEWEST:
-                self.removeInput(Input.MOVEWEST)
+        elif e.key == KEYMOVEEAST:
+            self.removeInput(Input.MOVEEAST)
 
-            elif e.key == KEYMOVEEAST:
-                self.removeInput(Input.MOVEEAST)
+        elif e.key == KEYATTACKNORTH:
+            self.removeInput(Input.ATTACKNORTH)
 
-            elif e.key == KEYATTACKNORTH:
-                self.removeInput(Input.ATTACKNORTH)
+        elif e.key == KEYATTACKSOUTH:
+            self.removeInput(Input.ATTACKSOUTH)
 
-            elif e.key == KEYATTACKSOUTH:
-                self.removeInput(Input.ATTACKSOUTH)
+        elif e.key == KEYATTACKWEST:
+            self.removeInput(Input.ATTACKWEST)
 
-            elif e.key == KEYATTACKWEST:
-                self.removeInput(Input.ATTACKWEST)
+        elif e.key == KEYATTACKEAST:
+            self.removeInput(Input.ATTACKEAST)
 
-            elif e.key == KEYATTACKEAST:
-                self.removeInput(Input.ATTACKEAST)
+        elif e.key == KEYINVENTORY:
+            self.removeInput(Input.INVENTORY)
 
-            elif e.key == KEYINVENTORY:
-                self.removeInput(Input.INVENTORY)
+        elif e.key == KEYESCAPE:
+            self.removeInput(Input.ESCAPE)
 
-            elif e.key == KEYESCAPE:
-                self.removeInput(Input.ESCAPE)
-
-
-        elif mode == 'm':
-
-            if e.key == KEYMOVENORTH:
-                self.removeInput(Input.MENUUP)
-
-            elif e.key == KEYMOVESOUTH:
-                self.removeInput(Input.MENUDOWN)
-
-            elif e.key == KEYENTER:
-                self.removeInput(Input.MENUSELECT)
-
-            elif e.key == KEYESCAPE:
-                self.removeInput(Input.INVENTORY)
+        elif e.key == KEYENTER:
+            self.removeInput(Input.MENUSELECT)
 
     # Adds input (i) to the tape iff it is not in the tape
     def addInput(self, i):

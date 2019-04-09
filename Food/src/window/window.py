@@ -19,9 +19,13 @@ class Window:
         self.window = pygame.display.set_mode(DEFAULT_RES)
 
     ## @brief Render to screen and maintain 60fps clock rate
-    def update(self, spriteList):
+    def update(self, sc):
 
         self.window.fill((0,0,0))
-        spriteList.draw(self.window)
+        sc.baselayer.draw(self.window)
+        sc.projectilelayer.draw(self.window)
+        sc.playerlayer.draw(self.window)
+        sc.menulayer.draw(self.window)
+        sc.textlayer.draw(self.window)
         pygame.display.flip()
         self.clock.tick(60)
