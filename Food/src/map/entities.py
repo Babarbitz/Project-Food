@@ -9,15 +9,14 @@ BG_STEP = (1280, 896)
 
 class Background(pygame.sprite.Sprite):
 
-    def __init__(self):
+    def __init__(self, image):
 
         super().__init__()
 
-        self.bgSprites = sprite.extractSprites(BG_SPRITE, BG_SIZE, BG_STEP)
-        self.image = self.bgSprites[0]
-        self.rect = self.image.get_rect()
+        self.id = None
 
-        self.id = game.ID.BACKGROUND
+        self.image = image
+        self.rect = self.image.get_rect()
 
         # Set flags for the spriteController
         self.renderable = True

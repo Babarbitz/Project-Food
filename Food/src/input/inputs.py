@@ -15,15 +15,24 @@ KEYATTACKNORTH = p.K_i
 KEYATTACKSOUTH = p.K_k
 KEYATTACKWEST  = p.K_j
 KEYATTACKEAST  = p.K_l
+KEYINVENTORY   = p.K_u
+KEYESCAPE      = p.K_ESCAPE
+KEYENTER       = p.K_RETURN
+
 
 # A simple enumerable type for identifying different player actions.
 class Input(Enum):
 
-    MOVENORTH = 1
-    MOVESOUTH = 2
-    MOVEEAST  = 3
-    MOVEWEST  = 4
+    MOVENORTH   = 1
+    MOVESOUTH   = 2
+    MOVEEAST    = 3
+    MOVEWEST    = 4
     ATTACKNORTH = 5
     ATTACKSOUTH = 6
     ATTACKEAST  = 7
     ATTACKWEST  = 8
+    MENUUP      = 9
+    MENUDOWN    = 10
+    MENUSELECT  = 11
+    INVENTORY   = 12
+    ESCAPE      = 13

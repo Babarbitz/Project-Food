@@ -13,9 +13,11 @@ class ID(Enum):
     WALL        = 5
     PROJECTILE  = 6
     BACKGROUND  = 7
+    TEXT        = 8
+    MENU        = 9
 
-#class Direction(Enum):
-#    NORTH = 1
-#    SOUTH = 2
-#    EAST  = 3
-#    WEST  = 4
+class Mode(Enum):
+    MAINMENU  = 1
+    GAME      = 2
+    PAUSE     = 3
+    INVENTORY = 4

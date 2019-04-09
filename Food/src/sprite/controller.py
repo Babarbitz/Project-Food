@@ -14,8 +14,10 @@ class SpriteGroupController():
         self.collidableEntities = pygame.sprite.Group()
 
         self.baselayer = []
+        self.textlayer = []
         self.projectilelayer = []
         self.playerlayer = []
+        self.menulayer = []
 
     def add(self,entity):
 
@@ -27,6 +29,12 @@ class SpriteGroupController():
             elif entity.id == game.ID.PROJECTILE:
                 self.projectilelayer.append(entity)
 
+            elif entity.id == game.ID.TEXT:
+                self.textlayer.append(entity)
+
+            elif entity.id == game.ID.MENU:
+                self.menulayer.append(entity)
+
             else:
                 self.baselayer.append(entity)
 
@@ -34,7 +42,6 @@ class SpriteGroupController():
 
         if entity.collidable:
             self.collidableEntities.add(entity)
-
 
 
     def remove(self, entity):
@@ -48,6 +55,12 @@ class SpriteGroupController():
         elif entity in self.playerlayer:
             self.playerlayer.remove(entity)
 
+        elif entity in self.textlayer:
+            self.textlayer.remove(entity)
+
+        elif entity in self.menulayer:
+            self.menulayer.remove(entity)
+
         self.collidableEntities.remove(entity)
 
         self.updateRender()
@@ -55,11 +68,8 @@ class SpriteGroupController():
     def updateRender(self):
 
         self.renderedEntities.empty()
-
         self.renderedEntities.add(self.baselayer)
-
         self.renderedEntities.add(self.projectilelayer)
-
         self.renderedEntities.add(self.playerlayer)
-
-
+        self.renderedEntities.add(self.menulayer)
+        self.renderedEntities.add(self.textlayer)
