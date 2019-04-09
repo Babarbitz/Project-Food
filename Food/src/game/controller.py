@@ -42,6 +42,7 @@ class GameController():
     def setup(self):
 
         # Map
+        self.mapController.generateMap()
         self.mapController.currentRoom.render(self.spriteController)
 
         # Player

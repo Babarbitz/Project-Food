@@ -1,3 +1,4 @@
+import random
 from .room import *
 
 
@@ -7,9 +8,8 @@ class MapController():
 
         self.currentLevel = 1
         self.map = []
-        self.generateLevel()
 
-        self.currentRoom = self.map[6]
+        self.currentRoom = None
         self.sc = sc
 
     def checkRoomTransition(self, pc):
@@ -50,7 +50,9 @@ class MapController():
         self.currentRoom.render(self.sc)
         print(self.currentRoom.position)
 
-    def generateLevel(self):
+    def generateMap(self):
+
+
 
         # Pick a layout
 
@@ -58,10 +60,10 @@ class MapController():
 
         layout = self.generateLayout()
 
+
         # Place rooms based on layout
 
         count = 0
-
         for room in layout:
 
             i = count  % 5
@@ -110,17 +112,27 @@ class MapController():
 
 
             # Place Room
-            if room == 'r':
-                self.map.append(Room(pos, doors))
-
             if room == 'n':
                 self.map.append(Room(pos, [False, False, False, False]))
+
+            elif room == 'r':
+                self.map.append(Room(pos, doors))
+
+            elif room == 's':
+                self.map.append(Room(pos, doors))
+                start = count
+
+            elif room == 'b':
+                self.map.append(Room(pos, doors))
+
 
             # figure out if the room has doors.
 
 
 
             count += 1
+
+        self.currentRoom = self.map[start]
 
     def generateLayout(self):
 
@@ -130,13 +142,38 @@ class MapController():
         # k = room with a key reward at the end.
 
 
-        layout = ['n','r','n','n','n',
-                  'r','r','r','r','n',
-                  'n','r','n','n','n',
-                  'n','n','n','n','n',
-                  'n','n','n','n','n']
+        layouts = [['s','n','n','n','n',
+                    'r','r','r','r','n',
+                    'r','r','n','n','n',
+                    'n','r','r','n','n',
+                    'n','n','b','n','n'],
+                   ['n','n','n','n','n',
+                    'n','n','r','r','r',
+                    'n','b','s','n','r',
+                    'n','r','r','r','n',
+                    'n','r'r'r','n','n'],
+                   ['n','n','n','n','n',
+                    'n','n','b','n','n',
+                    'n','r','r','n','n',
+                    'n','r','r','r','n',
+                    's','r','n','n','n'],
+                   ['n','n','n','n','n',
+                    'n','r','r','r','b',
+                    'n','r','n','r','n',
+                    's','r','r','r','n',
+                    'n','n','n','n','n'],
+                   ['n','n','n','n','n',
+                    's','r','r','r','n',
+                    'n','n','n','r','n',
+                    'n','b','r','r','n',
+                    'n','n','n','n','n'],
+                   ['n','n','n','n','n',
+                    'n','r','r','r','n',
+                    'n','r','n','r','n',
+                    'b','r','r','r','r',
+                    'n','n','n','n','s']]
 
-        return layout
+        return random.choice(layouts)
 
     def update(self, pc):
         self.checkRoomTransition(pc)
