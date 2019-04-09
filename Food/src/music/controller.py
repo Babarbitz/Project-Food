@@ -27,6 +27,14 @@ class MixerController():
 
 		self.mixer.music.play(-1)
 
+	def pauseMusic(self):
+
+		self.mixer.music.pause()
+
+	def resumeMusic(self):
+
+		self.mixer.music.unpause()
+
 	def stopMusic(self):
 
 		self.mixer.music.stop()

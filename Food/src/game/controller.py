@@ -39,7 +39,7 @@ class GameController():
         # game modules
         self.mapController        = map.MapController(self.spriteController)
         self.mainMenu             = menu.MenuController(self.spriteController,
-                                                        ['New Game', 'Load Game'])
+                                                        ['Press Enter To Start Game'])
         self.pauseMenu            = menu.MenuController(self.spriteController,
                                                         ['Resume', 'Save and Quit'])
         self.playerController     = player.PlayerController(self.spriteController.collidableEntities, self.mixer)
@@ -112,10 +112,13 @@ class GameController():
     def PauseMenu(self):
 
         self.mixer.playSoundEffect(P_MENU_SOUNDS_FP + "PauseMenu_Select_Option.1.ogg")
+        self.mixer.pauseMusic()
 
-        self.pauseMenu.render(self.spriteController)
+        self.pauseMenu.renderText(self.spriteController, "pause")
 
         while self.pauseMenuLoop:
+
+            self.pauseMenu.animateBackground(self.spriteController)
 
             self.inputController.gatherInputs('m')
 
@@ -138,6 +141,7 @@ class GameController():
 
                     if self.pauseMenu.selection == 0:
                         self.mixer.playSoundEffect(P_MENU_SOUNDS_FP + "PauseAndUnPauseGame.ogg")
+                        self.mixer.resumeMusic()
                         self.gameLoop = True
                     else:
                         self.gameLoop = False
@@ -151,6 +155,7 @@ class GameController():
 
     def startMenu(self):
 
+        self.mainMenu.renderText(self.spriteController, "main")
         self.mainMenu.render(self.spriteController)
 
         #play main menu music
@@ -160,6 +165,7 @@ class GameController():
 
         while self.mainMenuLoop:
 
+            self.mainMenu.animateBackground(self.spriteController)
             # Event handling
             self.inputController.gatherInputs('m')
 
@@ -168,6 +174,7 @@ class GameController():
 
             for event in self.inputController.inputs:
 
+                '''
                 if event == input.Input.MENUUP:
                     self.mixer.playSoundEffect(M_MENU_SOUNDS_FP + "Menu_Switch_Option.ogg")
                     self.mainMenu.selection = 0
@@ -175,8 +182,9 @@ class GameController():
                 elif event == input.Input.MENUDOWN:
                     self.mixer.playSoundEffect(M_MENU_SOUNDS_FP + "Menu_Switch_Option.ogg")
                     self.mainMenu.selection = 1
+                '''
 
-                elif event == input.Input.MENUSELECT:
+                if event == input.Input.MENUSELECT:
                     self.mixer.playSoundEffect(M_MENU_SOUNDS_FP + "Menu_Select_Option.ogg")
 
                     self.mainMenuLoop = False
@@ -188,7 +196,7 @@ class GameController():
                         print("load game")
 
             # Update game state
-            self.mainMenu.updateText()
+            #self.mainMenu.updateText()
 
             # Update the sprites and render
             self.windowController.update(self.spriteController)
