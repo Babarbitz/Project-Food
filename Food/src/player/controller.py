@@ -8,6 +8,7 @@
 import pygame
 import input
 import projectile
+import random
 
 from .abstract import *
 
@@ -27,6 +28,7 @@ PL_SPRITE = 'Food/assets/Chef.png'
 PL_STEP = (64,64)
 PL_SIZE = (64,64)
 
+PL_SOUNDS = 'Food/assets/sound/Player Sounds/'
 
 # Centers the sprite in the view
 OFFSET = (PL_STEP[0]/2) - (PR_STEP[0]/2)
@@ -39,7 +41,7 @@ class PlayerController(pygame.sprite.Sprite):
 ################################################################################
 
 
-    def __init__(self, cList):
+    def __init__(self, cList, mixer):
 
         # Call parent constructor
         super().__init__()
@@ -59,6 +61,9 @@ class PlayerController(pygame.sprite.Sprite):
 
         # Create Frame Counter
         self.frame = 0
+
+        # sound mixer
+        self.mixer = mixer
 
 
     def addToController(self, sc):
@@ -143,11 +148,27 @@ class PlayerController(pygame.sprite.Sprite):
     def attack(self, x, y, xs, ys, sprite, sc, pc):
 
         if not self.player.attackCooldown:
+            self.attackSound()
             temp = projectile.Projectile(x, y, xs, ys, sprite, self.cList)
             sc.add(temp)
             pc.addProjectile(temp)
             self.player.attackCooldown = True
             self.player.attackCooldownFrame = self.frame
+
+
+    def attackSound(self):
+
+        rand_sound = random.randint(1, 3)
+
+        if (rand_sound == 1):
+            self.mixer.playSoundEffect(PL_SOUNDS + "Knife_Throw_2.1.ogg")
+
+        elif (rand_sound == 2):
+            self.mixer.playSoundEffect(PL_SOUNDS + "Knife_Throw_3.1.ogg")
+
+        else:
+            self.mixer.playSoundEffect(PL_SOUNDS + "Knife_Throw_4.1.ogg")
+
 
 ###############################################################################
 #                           Collision Rules                                   #
