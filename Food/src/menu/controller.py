@@ -41,11 +41,11 @@ class MenuController():
 
     def render(self, sc):
 
-        sc.add(self.BG_ANIM[self.bg_index//2])
+        sc.add(self.BG_ANIM[self.bg_index//5])
 
     def clear(self, sc):
 
-        sc.remove(self.BG_ANIM[self.bg_index//2])
+        sc.remove(self.BG_ANIM[self.bg_index//5])
 
         for text in self.text:
             sc.remove(text)
@@ -65,13 +65,13 @@ class MenuController():
 
     def animateBackground(self, sc):
 
-        sc.remove(self.BG_ANIM[self.bg_index//2])
+        sc.remove(self.BG_ANIM[self.bg_index//5])
 
         self.bg_index += 1
-        if self.bg_index > 13:
+        if self.bg_index > 34:
             self.bg_index = 0
 
-        sc.add(self.BG_ANIM[self.bg_index//2])
+        sc.add(self.BG_ANIM[self.bg_index//5])
 
 
     def updateText(self):
