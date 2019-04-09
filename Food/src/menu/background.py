@@ -1,5 +1,6 @@
 import pygame
 import game
+
 class Background(pygame.sprite.Sprite):
 
     def __init__(self, image):

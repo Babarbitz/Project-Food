@@ -31,20 +31,19 @@ class MenuController():
             i += 50
 
 
-    def render(self):
+    def render(self, sc):
 
-        self.sc.add(self.background)
-
-        for text in self.text:
-            self.sc.add(text)
-        print("rendered")
-
-    def clear(self):
-
-        self.sc.remove(self.background)
+        sc.add(self.background)
 
         for text in self.text:
-            self.sc.remove(text)
+            sc.add(text)
+
+    def clear(self, sc):
+
+        sc.remove(self.background)
+
+        for text in self.text:
+            sc.remove(text)
 
     def updateText(self):
 

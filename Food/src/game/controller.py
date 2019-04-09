@@ -16,10 +16,9 @@ class GameController():
     def __init__(self):
 
         # Game loop control variables
-        self.gameLoop = True
+        self.gameLoop = False
         self.mainMenuLoop = True
-        self.pauseMenuLoop = True
-        self.menuLoop = True
+        self.pauseMenuLoop = False
 
 
         # Low level engine modules
@@ -37,11 +36,7 @@ class GameController():
         self.projectileController = projectile.ProjectileController(self.spriteController)
 
     def start(self):
-
-        #self.startMenu()
-        #self.PauseMenu()
-        self.setup()
-        self.game()
+        self.startMenu()
 
     def setup(self):
 
@@ -51,6 +46,8 @@ class GameController():
         # Player
         self.playerController.addToController(self.spriteController)
         self.playerController.setPosition(400,400)
+
+        self.game()
 
     def gameStateUpdate(self, inputs):
 
@@ -67,38 +64,39 @@ class GameController():
 
     def game(self):
 
+        isRunning = True
+        self.gameLoop = True
 
-        while self.gameLoop:
-
-            # Event handling
-            self.inputController.gatherInputs('g')
+        while isRunning:
 
             if self.inputController.exitSignal:
-                self.gameLoop = False
+                isRunning = False
 
-
-            # Update game state
-            self.gameStateUpdate(self.inputController.inputs)
-
-            for event in self.inputController.inputs:
-                if event == input.Input.ESCAPE:
-                    self.PauseMenu()
+            self.gameloop()
 
             # Update the sprites and render
             self.windowController.update(self.spriteController.renderedEntities)
 
+    def gameloop(self):
+
+        if self.gameLoop:
+
+            # Event handling
+            self.inputController.gatherInputs('g')
+
+            for event in self.inputController.inputs:
+                if event == input.Input.ESCAPE:
+                    self.pauseMenuLoop = True
+                    self.gameLoop = False
+
+            # Update game state
+            self.gameStateUpdate(self.inputController.inputs)
 
     def PauseMenu(self):
 
-        self.pauseMenu.render()
+        self.pauseMenu.render(self.spriteController2)
 
-        while self.pauseMenuLoop:
-
-            # Event handling
-            self.inputController.gatherInputs('m')
-
-            if self.inputController.exitSignal:
-                self.pauseMenuLoop = False
+        if self.pauseMenuLoop:
 
             for event in self.inputController.inputs:
 
@@ -110,10 +108,11 @@ class GameController():
 
                 elif event == input.Input.MENUSELECT:
 
-                    self.pauseMenu.clear()
+                    self.pauseMenu.clear(self.spriteController2)
                     self.pauseMenuLoop = False
 
                     if self.pauseMenu.selection == 0:
+                        self.gameLoop = True
                         pass
                     else:
                         self.gameLoop = False
@@ -121,13 +120,10 @@ class GameController():
             # Update game state
             self.pauseMenu.updateText()
 
-            # Update the sprites and render
-            self.windowController.update(self.spriteController.renderedEntities)
-        self.pauseMenu.clear()
 
     def startMenu(self):
 
-        self.mainMenu.render()
+        self.mainMenu.render(self.spriteController)
 
         while self.mainMenuLoop:
 
@@ -138,14 +134,20 @@ class GameController():
                 self.mainMenuLoop = False
 
             for event in self.inputController.inputs:
+
                 if event == input.Input.MENUUP:
                     self.mainMenu.selection = 0
+
                 elif event == input.Input.MENUDOWN:
                     self.mainMenu.selection = 1
+
                 elif event == input.Input.MENUSELECT:
-                    self.mainMenu.clear()
+
+                    self.mainMenuLoop = False
+                    self.mainMenu.clear(self.spriteController)
+
                     if self.mainMenu.selection == 0:
-                        print("new game")
+                        self.setup()
                     else:
                         print("load game")
 
