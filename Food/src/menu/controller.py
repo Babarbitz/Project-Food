@@ -14,13 +14,13 @@ class MenuController():
 
     def __init__(self, sc, messages):
 
-        self.BG_ANIM = [Background(sprite.extractSprites(MU_SPRITE_FP + "splash1.png", MU_SIZE, MU_STEP)[0]),
-                    Background(sprite.extractSprites(MU_SPRITE_FP + "splash2.png", MU_SIZE, MU_STEP)[0]),
-                    Background(sprite.extractSprites(MU_SPRITE_FP + "splash3.png", MU_SIZE, MU_STEP)[0]),
-                    Background(sprite.extractSprites(MU_SPRITE_FP + "splash4.png", MU_SIZE, MU_STEP)[0]),
-                    Background(sprite.extractSprites(MU_SPRITE_FP + "splash5.png", MU_SIZE, MU_STEP)[0]),
-                    Background(sprite.extractSprites(MU_SPRITE_FP + "splash6.png", MU_SIZE, MU_STEP)[0]),
-                    Background(sprite.extractSprites(MU_SPRITE_FP + "splash7.png", MU_SIZE, MU_STEP)[0])]
+        self.BG_ANIM = [Background(sprite.extractSprites(MU_SPRITE_FP + "splash1.1.png", MU_SIZE, MU_STEP)[0]),
+                    Background(sprite.extractSprites(MU_SPRITE_FP + "splash2.1.png", MU_SIZE, MU_STEP)[0]),
+                    Background(sprite.extractSprites(MU_SPRITE_FP + "splash3.1.png", MU_SIZE, MU_STEP)[0]),
+                    Background(sprite.extractSprites(MU_SPRITE_FP + "splash4.1.png", MU_SIZE, MU_STEP)[0]),
+                    Background(sprite.extractSprites(MU_SPRITE_FP + "splash5.1.png", MU_SIZE, MU_STEP)[0]),
+                    Background(sprite.extractSprites(MU_SPRITE_FP + "splash6.1.png", MU_SIZE, MU_STEP)[0]),
+                    Background(sprite.extractSprites(MU_SPRITE_FP + "splash7.1.png", MU_SIZE, MU_STEP)[0])]
 
         self.bg_index = 0
 
