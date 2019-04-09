@@ -40,10 +40,18 @@ class ProjectileController():
             collisions = pygame.sprite.spritecollide(p, self.cList, False)
 
             for c in collisions:
+                flag = False
                 if (c.id == game.ID.WALL):
                     self.remove(p)
                     self.sc.remove(p)
 
+                elif c.id == game.ID.ENEMY:
+                    c.hp = c.hp - p.attack
+                    self.remove(p)
+                    self.sc.remove(p)
+                    flag = True
+                if flag:
+                    break
 
     def update(self):
 

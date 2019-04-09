@@ -3,6 +3,7 @@
 #  @author Lucas Zacharewicz
 #  @date   March 03, 2019
 
+import enemy
 import input
 import map
 import menu
@@ -44,6 +45,7 @@ class GameController():
                                                         ['Resume', 'Save and Quit'])
         self.playerController     = player.PlayerController(self.spriteController.collidableEntities, self.mixer)
         self.projectileController = projectile.ProjectileController(self.spriteController)
+        self.enemyController      = enemy.EnemyController(self.spriteController.collidableEntities)
 
     def start(self):
         self.startMenu()
@@ -56,7 +58,9 @@ class GameController():
         self.mixer.playMusic()
 
         # Map
+        self.mapController.generateMap()
         self.mapController.currentRoom.render(self.spriteController)
+        self.enemyController.spawnEnemies(self.spriteController)
 
         # Player
         self.playerController.addToController(self.spriteController)
@@ -75,7 +79,7 @@ class GameController():
         self.projectileController.update()
 
         self.mapController.update(self.playerController)
-
+        self.enemyController.update(self.playerController.player)
 
     def game(self):
 
