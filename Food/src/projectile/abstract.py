@@ -11,7 +11,7 @@ import game
 class Projectile(pygame.sprite.Sprite):
 
 
-    def __init__(self, x, y, xspeed, yspeed, sprite, cList):
+    def __init__(self, x, y, xspeed, yspeed, sprite, cList, damage):
 
         super().__init__()
 
@@ -32,8 +32,5 @@ class Projectile(pygame.sprite.Sprite):
         self.yspeed = yspeed
 
         self.id = game.ID.PROJECTILE
-        #self.source = source
         self.cList = cList
-
-        # TODO
-        # Set game attributes like damage
+        self.attack = damage

@@ -8,6 +8,7 @@
 import pygame
 import input
 import projectile
+import random
 
 from .abstract import *
 
@@ -27,6 +28,7 @@ PL_SPRITE = 'Food/assets/Chef.png'
 PL_STEP = (64,64)
 PL_SIZE = (64,64)
 
+PL_SOUNDS = 'Food/assets/sound/Player Sounds/'
 
 # Centers the sprite in the view
 OFFSET = (PL_STEP[0]/2) - (PR_STEP[0]/2)
@@ -39,7 +41,7 @@ class PlayerController(pygame.sprite.Sprite):
 ################################################################################
 
 
-    def __init__(self, cList):
+    def __init__(self, cList, mixer):
 
         # Call parent constructor
         super().__init__()
@@ -60,6 +62,9 @@ class PlayerController(pygame.sprite.Sprite):
         # Create Frame Counter
         self.frame = 0
 
+        # sound mixer
+        self.mixer = mixer
+        self.invincbleFrame = 0
 
     def addToController(self, sc):
         sc.add(self.player)
@@ -143,11 +148,28 @@ class PlayerController(pygame.sprite.Sprite):
     def attack(self, x, y, xs, ys, sprite, sc, pc):
 
         if not self.player.attackCooldown:
-            temp = projectile.Projectile(x, y, xs, ys, sprite, self.cList)
+            self.attackSound()
+            temp = projectile.Projectile(x, y, xs, ys, sprite, self.cList,
+                    self.player.attack)
             sc.add(temp)
             pc.addProjectile(temp)
             self.player.attackCooldown = True
             self.player.attackCooldownFrame = self.frame
+
+
+    def attackSound(self):
+
+        rand_sound = random.randint(1, 3)
+
+        if (rand_sound == 1):
+            self.mixer.playSoundEffect(PL_SOUNDS + "Knife_Throw_2.1.ogg")
+
+        elif (rand_sound == 2):
+            self.mixer.playSoundEffect(PL_SOUNDS + "Knife_Throw_3.1.ogg")
+
+        else:
+            self.mixer.playSoundEffect(PL_SOUNDS + "Knife_Throw_4.1.ogg")
+
 
 ###############################################################################
 #                           Collision Rules                                   #
@@ -160,8 +182,11 @@ class PlayerController(pygame.sprite.Sprite):
 
         for i in collisions:
 
-            if (i.id == game.ID.WALL):
+            if (i.id == game.ID.WALL or i.id == game.ID.STRUCTURE):
                 self.collideWall(i)
+
+            elif (i.id == game.ID.ENEMY):
+                self.player.hp -= i.damage
 
 
     def collideWall(self,wall):
@@ -238,6 +263,14 @@ class PlayerController(pygame.sprite.Sprite):
             elif event == input.Input.ATTACKWEST:
                 self.attackWest(sc, pc)
 
+    def upgradeAttack(self):
+        self.player.attack += 1
+
+    def upgradeHP(self):
+        self.player.maxHp+= 1
+
+    def upgradeSpeed(self):
+        self.player.speed += 1
 
     def update(self, inputs, sc, pc):
 
@@ -248,5 +281,8 @@ class PlayerController(pygame.sprite.Sprite):
 
         self.checkStates()
         self.checkCollision()
+
+        if self.player.hp <= 0:
+            self.player.kill()
 
         self.frame += 1

@@ -25,6 +25,7 @@ class Window:
         sc.baselayer.draw(self.window)
         sc.projectilelayer.draw(self.window)
         sc.playerlayer.draw(self.window)
+        sc.enemylayer.draw(self.window)
         sc.menulayer.draw(self.window)
         sc.textlayer.draw(self.window)
         pygame.display.flip()
