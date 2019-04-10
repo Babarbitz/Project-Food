@@ -4,9 +4,9 @@ import sprite
 
 from .abstract import *
 
-IN_SPRITE_FP = "Food/assets/"
-IN_SIZE = (270, 270)
-IN_STEP = (270, 270)
+IN_SPRITE_FP = "Food/assets/Inventory/inventory.png"
+IN_SIZE = (580, 448)
+IN_STEP = (580, 448)
 
 class InventoryController():
 
@@ -14,7 +14,7 @@ class InventoryController():
 
 		self.inSprites = sprite.extractSprites(IN_SPRITE_FP, IN_SIZE, IN_STEP)
 
-		self.inventory = Inventory(self.inSprite[0])
+		self.inventory = Inventory(self.inSprites[0])
 
 		self.selection = 0
 
@@ -23,7 +23,7 @@ class InventoryController():
 		self.values = []
 
 
-	def render(self, sc, select):
+	def render(self, sc):
 
 		sc.add(self.inventory)
 
@@ -34,7 +34,7 @@ class InventoryController():
 
 	def updateSelection(self, sc, select):
 
-		if not select = self.selection:
+		if not select == self.selection:
 
 			self.remove(sc)
 			self.add(select)
@@ -49,10 +49,14 @@ class InventoryController():
 
 	def renderValues(self):
 
-
+		j = 0
+		i = 0
 		for value in getInventory():
-			self.values.append(game.Text((MU_SIZE[0]/2,100 + i), message, 30, WHITE))
-            i += 50
+			self.values.append(game.Text((MU_SIZE[0]/2,100 + i), str(value), 30, WHITE))
+			sc.add(self.values[j])
+			i += 50
+			j += 1
+
 
 	def spendItems(self, type, pc):
 
