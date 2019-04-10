@@ -151,7 +151,7 @@ class EnemyController():
         elif (abs(yDiff) <= enSpeed):
             self.moveY(enemy,yDiff)
 
-    def update(self, player):
+    def update(self, player, sc, ic):
 
         for enemy in self.enemies:
 
@@ -164,5 +164,7 @@ class EnemyController():
 
             if enemy.hp <= 0:
                 enemy.kill()
+                self.enemies.remove(enemy)
+                ic.spawnItem(sc, enemy.oldx, enemy.oldy)
 
             enemy.frame += 1
