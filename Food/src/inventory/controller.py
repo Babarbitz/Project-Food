@@ -4,17 +4,23 @@ import sprite
 
 from .abstract import *
 
-IN_SPRITE_FP = "Food/assets/Inventory/inventory.png"
+IN_SPRITE_FP = "Food/assets/Inventory/"
 IN_SIZE = (580, 448)
 IN_STEP = (580, 448)
+
+WHITE = (255,255,255)
 
 class InventoryController():
 
 	def __init__(self):
 
-		self.inSprites = sprite.extractSprites(IN_SPRITE_FP, IN_SIZE, IN_STEP)
+		self.inSprites = sprite.extractSprites(IN_SPRITE_FP + "inventory.1.png", IN_SIZE, IN_STEP)
 
 		self.inventory = Inventory(self.inSprites[0])
+
+		self.inSpriteSelectList =  [Inventory(sprite.extractSprites(IN_SPRITE_FP + "swordselect.png", IN_SIZE, IN_STEP)[0]),
+									Inventory(sprite.extractSprites(IN_SPRITE_FP + "bootselect.png", IN_SIZE, IN_STEP)[0]),
+									Inventory(sprite.extractSprites(IN_SPRITE_FP + "heartselect.png", IN_SIZE, IN_STEP)[0])]
 
 		self.selection = 0
 
@@ -25,19 +31,35 @@ class InventoryController():
 
 	def render(self, sc):
 
-		sc.add(self.inventory)
+		self.addValues()
+
+		sc.add(self.inSpriteSelectList[self.selection])
+
+		for value in self.values:
+			sc.add(value)
 
 	def clear(self, sc):
 
-		sc.remove(self.inventory)
+		sc.remove(self.inSpriteSelectList[self.selection])
+
+		for value in self.values:
+			sc.remove(value)
+
+		self.values = []
 
 
-	def updateSelection(self, sc, select):
+	def updateSelection(self, sc, direction):
 
-		if not select == self.selection:
+		self.clear(sc)
 
-			self.remove(sc)
-			self.add(select)
+		self.selection += -direction
+
+		if self.selection > 2:
+			self.selection = 0
+		elif self.selection < 0:
+			self.selection = 2
+
+		self.render(sc)
 
 	def getInventory(self):
 
@@ -47,22 +69,19 @@ class InventoryController():
 
 		self.inventory.inventList[type] += 1
 
-	def renderValues(self):
+	def addValues(self):
 
-		j = 0
 		i = 0
-		for value in getInventory():
-			self.values.append(game.Text((MU_SIZE[0]/2,100 + i), str(value), 30, WHITE))
-			sc.add(self.values[j])
-			i += 50
-			j += 1
+		for value in self.getInventory():
+			self.values.append(game.Text((780,260 + i), str(value)+'/'+str(self.requiredpts), 50, WHITE))
+			i += 140
 
 
-	def spendItems(self, type, pc):
+	def spendItems(self, pc):
 
-		if self.getInventory()[type] >= self.requiredpts:
+		if self.getInventory()[self.selection] >= self.requiredpts:
 
-			self.inventory.inventList[type] -= self.requiredpts
+			self.inventory.inventList[self.selection] -= self.requiredpts
 
 			if type == 0:
 				pc.upgradeAttack()
@@ -72,5 +91,5 @@ class InventoryController():
 				pc.upgradeHealth()
 
 
-			self.updateValues()
+			#self.updateValues()
 

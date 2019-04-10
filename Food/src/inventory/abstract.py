@@ -17,7 +17,10 @@ class Inventory(pygame.sprite.Sprite):
 		self.updatable = False
 		self.collidable = False
 
-		self.inventList = [0, 0, 0]
+		self.inventList = [0, 0, 10]
+
+		self.rect.x = 350
+		self.rect.y = 200
 
 	def getInventory(self):
 

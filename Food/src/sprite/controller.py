@@ -66,6 +66,9 @@ class SpriteGroupController():
         elif entity in self.menulayer:
             self.menulayer.remove(entity)
 
+        elif entity in self.inventorylayer:
+            self.inventorylayer.remove(entity)
+
         elif entity in self.enemylayer:
             self.enemylayer.remove(entity)
 
