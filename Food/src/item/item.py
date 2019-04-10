@@ -24,6 +24,9 @@ class Item(pygame.sprite.Sprite):
         self.rect.x = x
         self.rect.y = y
 
+
+    def pos(self):
+        return (self.rect.x + 30//2, self.rect.y + 36//2)
 '''def setImage(id):
 
     if id == ID.test:

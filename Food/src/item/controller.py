@@ -3,17 +3,17 @@ from .item import *
 import sprite
 import random
 
-IT_SPRITE = 'Food/assets/Chef.png'
-IT_SIZE = (32,32)
-IT_STEP = (32,32)
+IT_SPRITE = 'Food/assets/Coin Sprites/'
+IT_SIZE = (30,36)
+IT_STEP = (30,36)
 
 class ItemController():
 
     def __init__(self):
 
-        self.spritesList = [sprite.extractSprites(IT_SPRITE, IT_SIZE, IT_STEP)[0],
-        					sprite.extractSprites(IT_SPRITE, IT_SIZE, IT_STEP)[0],
-        					sprite.extractSprites(IT_SPRITE, IT_SIZE, IT_STEP)[0]]
+        self.spritesList = [sprite.extractSprites(IT_SPRITE + "Attack up Coin.1.png", IT_SIZE, IT_STEP)[0],
+        					sprite.extractSprites(IT_SPRITE + "Speed Up Coin.1.png", IT_SIZE, IT_STEP)[0],
+        					sprite.extractSprites(IT_SPRITE + "Health Up Coin.1.png", IT_SIZE, IT_STEP)[0]]
 
 
         self.itemList = []
@@ -32,8 +32,13 @@ class ItemController():
 
     	sc.add(item)
 
-    def pickUpItem(self):
-    	return None
+    def pickUpItem(self, sc, item):
+
+    	self.itemList.remove(item)
+
+    	sc.remove(item)
+    	
+
 
 
 

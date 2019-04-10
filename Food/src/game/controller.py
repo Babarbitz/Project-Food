@@ -79,7 +79,9 @@ class GameController():
 
         self.playerController.update(inputs,
                                      self.spriteController,
-                                     self.projectileController)
+                                     self.projectileController,
+                                     self.itemController,
+                                     self.inventoryController)
 
         self.projectileController.update()
 
