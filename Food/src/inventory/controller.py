@@ -18,9 +18,9 @@ class InventoryController():
 
 		self.inventory = Inventory(self.inSprites[0])
 
-		self.inSpriteSelectList =  [Inventory(sprite.extractSprites(IN_SPRITE_FP + "swordselect.png", IN_SIZE, IN_STEP)[0]),
-									Inventory(sprite.extractSprites(IN_SPRITE_FP + "bootselect.png", IN_SIZE, IN_STEP)[0]),
-									Inventory(sprite.extractSprites(IN_SPRITE_FP + "heartselect.png", IN_SIZE, IN_STEP)[0])]
+		self.inSpriteSelectList =  [Inventory(sprite.extractSprites(IN_SPRITE_FP + "swordselect.1.png", IN_SIZE, IN_STEP)[0]),
+									Inventory(sprite.extractSprites(IN_SPRITE_FP + "bootselect.1.png", IN_SIZE, IN_STEP)[0]),
+									Inventory(sprite.extractSprites(IN_SPRITE_FP + "heartselect.1.png", IN_SIZE, IN_STEP)[0])]
 
 		self.selection = 0
 

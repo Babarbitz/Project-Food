@@ -115,7 +115,6 @@ class GameController():
                 elif event == input.Input.INVENTORY:
                     print("bring up inventory")
                     self.inventoryLoop = True
-                    #self.gameLoop = False
                     self.InventoryMenu()
 
             # Update game state
