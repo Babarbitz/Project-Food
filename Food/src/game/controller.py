@@ -12,6 +12,7 @@ import player
 import sprite
 import window
 import music
+import inventory
 
 #Constants
 MUSIC_FP = "Food/assets/sound/Game_Music/"
@@ -27,6 +28,7 @@ class GameController():
         self.gameLoop = False
         self.mainMenuLoop = True
         self.pauseMenuLoop = False
+        self.inventoryLoop = False
 
 
         # Low level engine modules
@@ -46,6 +48,7 @@ class GameController():
         self.playerController     = player.PlayerController(self.spriteController.collidableEntities, self.mixer)
         self.projectileController = projectile.ProjectileController(self.spriteController)
         self.enemyController      = enemy.EnemyController(self.spriteController.collidableEntities)
+        self.inventoryController  = inventory.InventoryController()
 
     def start(self):
         self.startMenu()
@@ -117,6 +120,10 @@ class GameController():
                     self.pauseMenuLoop = True
                     self.gameLoop = False
                     self.PauseMenu()
+                elif event == input.Input.INVENTORY:
+                    print("bring up inventory")
+                    self.inventoryLoop = True
+                    self.InventoryMenu()
 
             # Update game state
             self.gameStateUpdate(self.inputController.inputs)
@@ -211,4 +218,33 @@ class GameController():
             #self.mainMenu.updateText()
 
             # Update the sprites and render
+            self.windowController.update(self.spriteController)
+
+
+    def InventoryMenu(self):
+
+        self.inventoryController.render(self.spriteController)
+
+        while self.inventoryLoop:
+
+            self.inputController.gatherInputs('m')
+
+            for event in self.inputController.inputs:
+
+                if event == input.Input.MENUUP:
+                
+                    self.inventoryController.updateSelection(self.spriteController, 1)
+
+                elif event == input.Input.MENUDOWN:
+        
+                    self.inventoryController.updateSelection(self.spriteController, -1)
+
+                if event == input.Input.MENUSELECT:
+                    self.inventoryController.spendItems(self.playerController)
+
+
+                    self.inventoryLoop = False
+                    self.inventoryController.clear(self.spriteController)
+
+
             self.windowController.update(self.spriteController)

@@ -15,6 +15,7 @@ class ID(Enum):
     BACKGROUND  = 7
     TEXT        = 8
     MENU        = 9
+    INVENT      = 10
 
 class Mode(Enum):
     MAINMENU  = 1
