@@ -177,6 +177,17 @@ class PlayerController(pygame.sprite.Sprite):
 #                           Collision Rules                                   #
 ###############################################################################
 
+    def checkItems(self, sc, it_c, in_c):
+
+        for item in it_c.itemList:
+            #print(abs(self.player.rect.x - item.pos()[0]) < 5, "and", abs(self.player.rect.y - item.pos()[1]) < 5)
+
+            if (abs(self.player.rect.x + OFFSET - item.pos()[0]) < 15 and abs(self.player.rect.y + PL_STEP[0] - item.pos()[1]) < 15):
+                print("pickup")
+                it_c.pickUpItem(sc, item)
+
+                type = item.type
+                in_c.addItem(type)
 
     def checkCollision(self):
 
@@ -292,7 +303,7 @@ class PlayerController(pygame.sprite.Sprite):
     def upgradeSpeed(self):
         self.player.speed += 1
 
-    def update(self, inputs, sc, pc):
+    def update(self, inputs, sc, pc, it_c, in_c):
 
         self.oldx = self.player.rect.x
         self.oldy = self.player.rect.y
@@ -301,6 +312,7 @@ class PlayerController(pygame.sprite.Sprite):
 
         self.checkStates()
         self.checkCollision()
+        self.checkItems(sc, it_c, in_c)
 
 
         self.frame += 1

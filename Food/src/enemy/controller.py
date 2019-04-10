@@ -12,32 +12,14 @@ import game
 import sprite
 import map
 from random import randint
-from random import choice
 
 from .abstract import *
 # image, hp, speed, damage
 #ENEMYDATA = [image, 3, 3, 0]
 
-SPRITES = ['Food/assets/EnemySprites/Avocado.png',
-           'Food/assets/EnemySprites/Bacon.png',
-           'Food/assets/EnemySprites/Carrot.png',
-           'Food/assets/EnemySprites/Cherry.png',
-           'Food/assets/EnemySprites/Corn.png',
-           'Food/assets/EnemySprites/Dragonfruit.png',
-           'Food/assets/EnemySprites/Egg.png',
-           'Food/assets/EnemySprites/Hamburger.png',
-           'Food/assets/EnemySprites/Orange.png',
-           'Food/assets/EnemySprites/Pancake.png',
-           'Food/assets/EnemySprites/Pizza.png',
-           'Food/assets/EnemySprites/Ramen.png',
-           'Food/assets/EnemySprites/Soda.png',
-           'Food/assets/EnemySprites/Toast.png',
-           'Food/assets/EnemySprites/Tomato.png',
-           'Food/assets/EnemySprites/Watermelon.png']
-
-STEP = (2048,2048)
-SIZE = (2048,2048)
-
+IT_SPRITE = 'Food/assets/test.png'
+IT_SIZE = (32,32)
+IT_STEP = (32,32)
 
 class EnemyController():
 
@@ -46,34 +28,22 @@ class EnemyController():
 
         self.enemies = []
 
-        self.sprites = []
+        self.sprites = sprite.extractSprites(IT_SPRITE, IT_SIZE, IT_STEP)
 
-        for sheet in SPRITES:
-            temp = sprite.extractSprites(sheet, SIZE, STEP)
-            self.sprites.append(pygame.transform.scale(temp[0],(64,64)))
-
-
-        self.data = [[1, 2, 1],
-                     [2, 3, 2],
-                     [3, 4, 2]]
-
+        self.data = [[self.sprites[0], 3, 3, 1]]
 
         #set collision list
         self.cList = cList
 
 
-    def spawnEnemies(self, sc, level):
+    def spawnEnemies(self, sc):
 
-        for i in range(randint(1 * (level+1), 5 * (level+1))):
-            self.enemies.append(Enemy(choice(self.sprites),
-                                      self.data[level],
-                                      (randint(130,1000), randint(130,800))))
-            self.renderEnemies(sc)
+       # for i in range(randint(0, 5)):
+        #self.enemies.append(Enemy(self.data[0], (200, 200)))
+        #self.enemies.append(Enemy(self.data[0], (600, 200)))
+        self.enemies.append(Enemy(self.data[0], (400, 800)))
+        self.renderEnemies(sc)
 
-    def killall(self, sc):
-        for enemy in self.enemies:
-            sc.remove(enemy)
-            enemy.kill()
 
     def renderEnemies(self,sc):
         for enemy in self.enemies:
@@ -151,7 +121,7 @@ class EnemyController():
         elif (abs(yDiff) <= enSpeed):
             self.moveY(enemy,yDiff)
 
-    def update(self, player):
+    def update(self, player, sc, ic):
 
         for enemy in self.enemies:
 
@@ -164,5 +134,7 @@ class EnemyController():
 
             if enemy.hp <= 0:
                 enemy.kill()
+                self.enemies.remove(enemy)
+                ic.spawnItem(sc, enemy.oldx, enemy.oldy)
 
             enemy.frame += 1
