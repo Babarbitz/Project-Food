@@ -10,6 +10,7 @@ import game
 
 PL_SPEED = 3
 PL_MAXHP = 4
+PL_ATTACK = 1
 
 
 class Player(pygame.sprite.Sprite):
@@ -35,6 +36,8 @@ class Player(pygame.sprite.Sprite):
         self.attackCooldownFrame = 0
 
         # Player stats
+        self.speed = PL_SPEED
+        self.attack = PL_ATTACK
         self.hp = PL_MAXHP
         self.maxHP = PL_MAXHP
 
@@ -42,3 +45,6 @@ class Player(pygame.sprite.Sprite):
     @property
     def pos(self):
         return (self.rect.x,self.rect.y)
+
+    def damage(self, enemy):
+        self.hp -= enemy.damage

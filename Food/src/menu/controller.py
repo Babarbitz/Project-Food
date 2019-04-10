@@ -4,7 +4,7 @@ import sprite
 
 from .background import *
 
-MU_SPRITE = 'Food/assets/menu.png'
+MU_SPRITE_FP = 'Food/assets/screen/'
 MU_SIZE = (1280,960)
 MU_STEP = (1280,960)
 
@@ -14,36 +14,65 @@ class MenuController():
 
     def __init__(self, sc, messages):
 
-        BG = sprite.extractSprites(MU_SPRITE, MU_SIZE, MU_STEP)
+        self.BG_ANIM = [Background(sprite.extractSprites(MU_SPRITE_FP + "splash1.1.png", MU_SIZE, MU_STEP)[0]),
+                    Background(sprite.extractSprites(MU_SPRITE_FP + "splash2.1.png", MU_SIZE, MU_STEP)[0]),
+                    Background(sprite.extractSprites(MU_SPRITE_FP + "splash3.1.png", MU_SIZE, MU_STEP)[0]),
+                    Background(sprite.extractSprites(MU_SPRITE_FP + "splash4.1.png", MU_SIZE, MU_STEP)[0]),
+                    Background(sprite.extractSprites(MU_SPRITE_FP + "splash5.1.png", MU_SIZE, MU_STEP)[0]),
+                    Background(sprite.extractSprites(MU_SPRITE_FP + "splash6.1.png", MU_SIZE, MU_STEP)[0]),
+                    Background(sprite.extractSprites(MU_SPRITE_FP + "splash7.1.png", MU_SIZE, MU_STEP)[0])]
+
+        self.bg_index = 0
 
         self.selection = 0
 
         self.sc = sc
 
-        self.background = Background(BG[0])
+        #self.background = Background(BG_ANIM[self.bg_index][0])
 
         self.text = []
 
         i = 0
 
-        for message in messages:
-            self.text.append(game.Text((MU_SIZE[0]/2,100 + i), message, 30, WHITE))
+        '''for message in messages:
+            self.text.append(game.Text((MU_SIZE[0]/2-150,700 + i), message, 50, WHITE))
             i += 50
-
+        '''
 
     def render(self, sc):
 
-        sc.add(self.background)
+        sc.add(self.BG_ANIM[self.bg_index//5])
+
+    def clear(self, sc):
+
+        sc.remove(self.BG_ANIM[self.bg_index//5])
+
+        for text in self.text:
+            sc.remove(text)
+
+    def renderText(self, sc, mode):
+
+        if mode == "main":
+            self.text.append(game.Text((MU_SIZE[0]/2-200,700), "Press Enter To", 50, WHITE))
+            self.text.append(game.Text((MU_SIZE[0]/2-150,750), "Start Game", 50, WHITE))
+
+        elif mode == "pause":
+            self.text.append(game.Text((MU_SIZE[0]/2-140,700), "Resume", 50, WHITE))
+            self.text.append(game.Text((MU_SIZE[0]/2-170,750), "Quit Game", 50, WHITE))
 
         for text in self.text:
             sc.add(text)
 
-    def clear(self, sc):
+    def animateBackground(self, sc):
 
-        sc.remove(self.background)
+        sc.remove(self.BG_ANIM[self.bg_index//5])
 
-        for text in self.text:
-            sc.remove(text)
+        self.bg_index += 1
+        if self.bg_index > 34:
+            self.bg_index = 0
+
+        sc.add(self.BG_ANIM[self.bg_index//5])
+
 
     def updateText(self):
 
