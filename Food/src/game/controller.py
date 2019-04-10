@@ -115,6 +115,7 @@ class GameController():
                 elif event == input.Input.INVENTORY:
                     print("bring up inventory")
                     self.inventoryLoop = True
+                    #self.gameLoop = False
                     self.InventoryMenu()
 
             # Update game state
@@ -216,3 +217,27 @@ class GameController():
     def InventoryMenu(self):
 
         self.inventoryController.render(self.spriteController)
+
+        while self.inventoryLoop:
+
+            self.inputController.gatherInputs('m')
+
+            for event in self.inputController.inputs:
+
+                if event == input.Input.MENUUP:
+                
+                    self.inventoryController.updateSelection(self.spriteController, 1)
+
+                elif event == input.Input.MENUDOWN:
+        
+                    self.inventoryController.updateSelection(self.spriteController, -1)
+
+                if event == input.Input.MENUSELECT:
+                    self.inventoryController.spendItems(self.playerController)
+
+
+                    self.inventoryLoop = False
+                    self.inventoryController.clear(self.spriteController)
+
+
+            self.windowController.update(self.spriteController)

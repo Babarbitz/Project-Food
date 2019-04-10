@@ -76,6 +76,9 @@ class InputController:
             elif e.key == KEYENTER:
                 self.addInput(Input.MENUSELECT)
 
+            elif e.key == KEYINVENTORY:
+                self.addInput(Input.INVENTORY)
+
 
     # Removes inputs from the input list
     def keyRelease(self, e):
