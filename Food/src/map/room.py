@@ -6,24 +6,21 @@
 from .entities import *
 from .identifiers import *
 
-DOOR_SPRITE = 'Food/assets/door.png'
-DOOR_SIZE = (512,128)
-DOOR_STEP = (128,128)
+ST_SPRITE = 'Food/assets/StructureSprites/Tree.png'
+ST_SIZE = (2048,2432)
 
+DOOR_STEP = (128,128)
 
 class Room():
 
-    def __init__(self, pos, doors):
+    def __init__(self, pos, doors, BG, DOORS, portal):
 
         # Position in map
         self.position = pos
 
-        BG = sprite.extractSprites(BG_SPRITE, BG_SIZE, BG_STEP)
-
         # Room background Image
-        self.background = Background(BG[0])
+        self.background = Background(BG)
 
-        # TODO: Refactor to make not hardcoded
         # Room Wall collison
         self.walls = []
         self.walls.append(Wall([0,0],[128,896]))
@@ -31,15 +28,18 @@ class Room():
         self.walls.append(Wall([1152,0],[128,896]))
         self.walls.append(Wall([0,768],[1280,128]))
 
+        temp = sprite.extractSprites(ST_SPRITE, ST_SIZE, ST_SIZE)
+        self.Structure = pygame.transform.scale(temp[0],(128,128))
 
-        # structures
         self.structures = []
-
-        # enemies
+        if portal:
+            self.structures.append(Structure((600,450),self.Structure))
 
         # doors
-        self.doors = addDoors(doors)
+        self.doors = addDoors(doors,DOORS)
 
+        # has it been cleared?
+        self.cleared = False
 
     def render(self, sc):
 
@@ -70,28 +70,25 @@ class Room():
 
 
 
-def addDoors(doors):
-
-
-    Sprites = sprite.extractSprites(DOOR_SPRITE, DOOR_SIZE, DOOR_STEP)
+def addDoors(doors,DOORS):
 
     doorList = []
 
     # North door
     if doors[0]:
-        doorList.append(Door(Sprites[0],(BG_SIZE[0]/2 - DOOR_STEP[0] / 2,11), ID.NORTH))
+        doorList.append(Door(DOORS[0],(BG_SIZE[0]/2 - DOOR_STEP[0] / 2,11), ID.NORTH))
 
     # South door
     if doors[1]:
-        doorList.append(Door(Sprites[1],(BG_SIZE[0]/2 -
+        doorList.append(Door(DOORS[1],(BG_SIZE[0]/2 -
             DOOR_STEP[0]/2,BG_SIZE[1] - 13 - DOOR_STEP[0]), ID.SOUTH))
 
     # East door
     if doors[2]:
-        doorList.append(Door(Sprites[2],(BG_SIZE[0] - 12 - DOOR_STEP[0],BG_SIZE[1]/2 - DOOR_STEP[1]/2), ID.EAST))
+        doorList.append(Door(DOORS[2],(BG_SIZE[0] - 12 - DOOR_STEP[0],BG_SIZE[1]/2 - DOOR_STEP[1]/2), ID.EAST))
 
     # West door
     if doors[3]:
-        doorList.append(Door(Sprites[3],(11,BG_SIZE[1]/2 - DOOR_STEP[1]/2), ID.WEST))
+        doorList.append(Door(DOORS[3],(11,BG_SIZE[1]/2 - DOOR_STEP[1]/2), ID.WEST))
 
     return doorList

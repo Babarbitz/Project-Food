@@ -8,7 +8,7 @@ import pygame
 import game
 
 
-PL_SPEED = 3
+PL_SPEED = 4
 PL_MAXHP = 4
 PL_ATTACK = 1
 
@@ -34,6 +34,9 @@ class Player(pygame.sprite.Sprite):
         # Establish player states
         self.attackCooldown = False
         self.attackCooldownFrame = 0
+
+        self.isHit = False
+        self.hitFrame = 0
 
         # Player stats
         self.speed = PL_SPEED

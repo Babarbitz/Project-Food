@@ -59,8 +59,7 @@ class GameController():
 
         # Map
         self.mapController.generateMap()
-        self.mapController.currentRoom.render(self.spriteController)
-        self.enemyController.spawnEnemies(self.spriteController)
+        #self.enemyController.spawnEnemies(self.spriteController)
 
         # Player
         self.playerController.addToController(self.spriteController)
@@ -78,8 +77,17 @@ class GameController():
 
         self.projectileController.update()
 
-        self.mapController.update(self.playerController)
+        self.mapController.update(self.playerController, self.enemyController)
         self.enemyController.update(self.playerController.player)
+
+        if self.mapController.gameEnd:
+            print("you win")
+            self.gameLoop = False
+            self.isRunning = False
+        if self.playerController.isDead:
+            print("you loose")
+            self.gameLoop = False
+            self.isRunning = False
 
     def game(self):
 

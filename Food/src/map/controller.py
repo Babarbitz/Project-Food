@@ -1,18 +1,51 @@
+import pygame
 import random
+import sprite
+
 from .room import *
 
+BG_SPRITES = ['Food/assets/Backgrounds/dungeon.png',
+              'Food/assets/Backgrounds/restaurant.png',
+              'Food/assets/Backgrounds/woods.png']
+
+DR_SPRITES = ['Food/assets/DoorSprites/DungeonDoor.png',
+              'Food/assets/DoorSprites/RestaurantDoor.png',
+              'Food/assets/DoorSprites/WoodsDoor.png']
+
+BG_SIZE = (1280,896)
+DR_SIZE = (2048,2304)
 
 class MapController():
 
     def __init__(self, sc):
 
-        self.currentLevel = 1
         self.map = []
+        self.level = 0
 
         self.currentRoom = None
         self.sc = sc
 
-    def checkRoomTransition(self, pc):
+        self.gameEnd = False
+
+        self.BGSPRITES = []
+        self.DOORSPRITES = []
+
+        # Sprites
+        for sheet in BG_SPRITES:
+            temp = sprite.extractSprites(sheet, BG_SIZE, BG_SIZE)
+            self.BGSPRITES.append(temp[0])
+
+        for sheet in DR_SPRITES:
+            temp = sprite.extractSprites(sheet, DR_SIZE, DR_SIZE)
+            temp = pygame.transform.scale(temp[0],(128,128))
+            north = temp
+            south = pygame.transform.rotate(temp, -180)
+            east = pygame.transform.rotate(temp, -90)
+            west = pygame.transform.rotate(temp, -270)
+            self.DOORSPRITES.append([north,south,east,west])
+
+
+    def checkRoomTransition(self, pc, ec):
 
         for door in self.currentRoom.doors:
             collisions = pygame.sprite.spritecollide(door,
@@ -22,10 +55,25 @@ class MapController():
             for i in collisions:
                 if (i.id == game.ID.PLAYER):
                     pc.collideDoor(door)
-                    self.transition(door.type)
+                    self.transition(door.type, ec)
+
+    def checkLevelTransition(self, pc):
+        for s in self.currentRoom.structures:
+            collisions = pygame.sprite.spritecollide(s,
+                                                     self.sc.collidableEntities,
+                                                     False)
+            for i in collisions:
+                if (i.id == game.ID.PLAYER):
+                    pc.setPosition(400,400)
+                    self.currentRoom.clearRoom(self.sc)
+                    self.level += 1
+                    if self.level > 2:
+                        self.gameEnd = True
+                    else:
+                        self.generateMap()
 
 
-    def transition(self, direction):
+    def transition(self, direction, ec):
 
         position = self.currentRoom.position
         self.currentRoom.clearRoom(self.sc)
@@ -45,14 +93,12 @@ class MapController():
         if direction == ID.WEST:
             self.currentRoom = self.map[(i - 1) + 5 * j]
 
-
-
+        ec.killall(self.sc)
+        ec.spawnEnemies(self.sc, self.level)
         self.currentRoom.render(self.sc)
         print(self.currentRoom.position)
 
     def generateMap(self):
-
-
 
         # Pick a layout
 
@@ -113,34 +159,32 @@ class MapController():
 
             # Place Room
             if room == 'n':
-                self.map.append(Room(pos, [False, False, False, False]))
+                self.map.append(Room(pos,
+                                     [False, False, False, False],
+                                     self.BGSPRITES[self.level],
+                                     self.DOORSPRITES[self.level],
+                                     False))
+
 
             elif room == 'r':
-                self.map.append(Room(pos, doors))
+                self.map.append(Room(pos, doors, self.BGSPRITES[self.level],
+                                     self.DOORSPRITES[self.level], False))
 
             elif room == 's':
-                self.map.append(Room(pos, doors))
+                self.map.append(Room(pos, doors, self.BGSPRITES[self.level],
+                                     self.DOORSPRITES[self.level], True))
                 start = count
 
             elif room == 'b':
-                self.map.append(Room(pos, doors))
-
-
-            # figure out if the room has doors.
-
-
+                self.map.append(Room(pos, doors, self.BGSPRITES[self.level],
+                                     self.DOORSPRITES[self.level], True))
 
             count += 1
 
         self.currentRoom = self.map[start]
+        self.currentRoom.render(self.sc)
 
     def generateLayout(self):
-
-
-        # s = starting room
-        # n = no room
-        # k = room with a key reward at the end.
-
 
         layouts = [['s','n','n','n','n',
                     'r','r','r','r','n',
@@ -175,5 +219,6 @@ class MapController():
 
         return random.choice(layouts)
 
-    def update(self, pc):
-        self.checkRoomTransition(pc)
+    def update(self, pc, ec):
+        self.checkRoomTransition(pc,ec)
+        self.checkLevelTransition(pc)

@@ -9,7 +9,7 @@ import game
 
 class Enemy(pygame.sprite.Sprite):
 
-    def __init__(self, data, pos):
+    def __init__(self, image, data, pos):
 
         super().__init__()
 
@@ -19,16 +19,16 @@ class Enemy(pygame.sprite.Sprite):
         self.updatable  = True
         self.collidable = True
 
-        self.image = data[0]
+        self.image = image
         self.rect = self.image.get_rect()
 
         self.rect.x = pos[0]
         self.rect.y = pos[1]
 
         # Attributes
-        self.hp = data[1]
-        self.speed = data[2]
-        self.damage = data[3]
+        self.hp = data[0]
+        self.speed = data[1]
+        self.damage = data[2]
 
         self.oldx = pos[0]
         self.oldy = pos[1]

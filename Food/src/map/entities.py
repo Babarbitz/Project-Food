@@ -25,12 +25,12 @@ class Background(pygame.sprite.Sprite):
 
 class Structure(pygame.sprite.Sprite):
 
-    def __init__(self,pos,size,sprite):
+    def __init__(self,pos,sprite):
 
         super().__init__()
 
         #self.Sprite = se.extractSprites(sprite, size, size)
-        self.image = self.sSprites[0]
+        self.image = sprite
 
         self.rect = self.image.get_rect()
         self.rect.x = pos[0]

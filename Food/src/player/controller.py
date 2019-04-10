@@ -26,7 +26,7 @@ PR_SIZE = (128,32)
 
 PL_SPRITE = 'Food/assets/Chef.png'
 PL_STEP = (64,64)
-PL_SIZE = (64,64)
+PL_SIZE = (256,64)
 
 PL_SOUNDS = 'Food/assets/sound/Player Sounds/'
 
@@ -61,6 +61,8 @@ class PlayerController(pygame.sprite.Sprite):
 
         # Create Frame Counter
         self.frame = 0
+
+        self.isDead = False
 
         # sound mixer
         self.mixer = mixer
@@ -182,11 +184,11 @@ class PlayerController(pygame.sprite.Sprite):
 
         for i in collisions:
 
-            if (i.id == game.ID.WALL or i.id == game.ID.STRUCTURE):
+            if (i.id == game.ID.WALL):
                 self.collideWall(i)
 
             elif (i.id == game.ID.ENEMY):
-                self.player.hp -= i.damage
+                self.collideEnemy(i)
 
 
     def collideWall(self,wall):
@@ -202,6 +204,12 @@ class PlayerController(pygame.sprite.Sprite):
 
         elif(self.oldy >= wall.rect.y + wall.rect.height):
             self.player.rect.y = wall.rect.y + wall.rect.height
+
+    def collideEnemy(self, enemy):
+        if not self.player.isHit:
+            self.player.hp -= enemy.damage
+            self.player.isHit = True
+            self.player.hitFrame = self.frame
 
 
     def collideDoor(self, door):
@@ -234,6 +242,18 @@ class PlayerController(pygame.sprite.Sprite):
         if self.frame - self.player.attackCooldownFrame > 20: #<- attack cool down
             self.player.attackCooldown = False
 
+        if self.frame - self.player.hitFrame > 40: #<- invunrubility
+            self.player.isHit = False
+
+        if self.player.hp <= 0:
+            self.player.kill()
+            self.isDead = True
+
+        if self.player.isHit:
+            if self.frame % 2 == 0:
+                self.player.image = self.plSprites[3]
+            else:
+                self.player.image = self.plSprites[0]
 
     def handleInputs(self, inputs, sc, pc):
 
@@ -282,7 +302,5 @@ class PlayerController(pygame.sprite.Sprite):
         self.checkStates()
         self.checkCollision()
 
-        if self.player.hp <= 0:
-            self.player.kill()
 
         self.frame += 1
