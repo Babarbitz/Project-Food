@@ -19,6 +19,7 @@ class SpriteGroupController():
         self.enemylayer = pygame.sprite.Group()
         self.menulayer = pygame.sprite.Group()
         self.inventorylayer = pygame.sprite.Group()
+        self.itemlayer = pygame.sprite.Group()
 
     def add(self,entity):
 
@@ -41,6 +42,10 @@ class SpriteGroupController():
 
             elif entity.id == game.ID.ENEMY:
                 self.enemylayer.add(entity)
+
+            elif entity.id == game.ID.ITEM:
+                self.itemlayer.add(entity)
+                print(self.itemlayer.has(entity))
 
             else:
                 self.baselayer.add(entity)
@@ -71,5 +76,8 @@ class SpriteGroupController():
 
         elif entity in self.enemylayer:
             self.enemylayer.remove(entity)
+
+        elif entity in self.itemlayer:
+            self.itemlayer.remove(entity)
 
         self.collidableEntities.remove(entity)

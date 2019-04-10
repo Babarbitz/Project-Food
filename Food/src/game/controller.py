@@ -13,6 +13,7 @@ import sprite
 import window
 import music
 import inventory
+import item
 
 #Constants
 MUSIC_FP = "Food/assets/sound/Game_Music/"
@@ -49,6 +50,7 @@ class GameController():
         self.projectileController = projectile.ProjectileController(self.spriteController)
         self.enemyController      = enemy.EnemyController(self.spriteController.collidableEntities)
         self.inventoryController  = inventory.InventoryController()
+        self.itemController       = item.ItemController()
 
     def start(self):
         self.startMenu()
@@ -82,7 +84,7 @@ class GameController():
         self.projectileController.update()
 
         self.mapController.update(self.playerController)
-        self.enemyController.update(self.playerController.player)
+        self.enemyController.update(self.playerController.player, self.spriteController, self.itemController)
 
     def game(self):
 

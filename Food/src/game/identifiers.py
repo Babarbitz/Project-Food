@@ -16,6 +16,7 @@ class ID(Enum):
     TEXT        = 8
     MENU        = 9
     INVENT      = 10
+    ITEM        = 11
 
 class Mode(Enum):
     MAINMENU  = 1
